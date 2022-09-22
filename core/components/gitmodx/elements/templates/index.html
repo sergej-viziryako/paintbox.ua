@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="mainpage popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks popup-holder-registr" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    <section class="section- section-mainslider">
+      <div class="container">
+        {set $rows = json_decode($_modx->resource.slider_simple, true)}
+        {if $rows?}
+          <div class="mainslider-block">
+            <div class="mainslider-background">
+              {include 'logo_block'}
+            </div>
+            <div class="mainslider slider-mainslider">
+              {foreach $rows as $row}
+                {if $_modx->config.cultureKey != 'ru'}
+                  {set $url = $row.linkUA}
+                  {set $image = $row.imageUA}
+                  {set $image_mob = $row.image_mobUA}
+                {else}
+                  {set $url = $row.link}
+                  {set $image = $row.image}
+                  {set $image_mob = $row.image_mob}
+                {/if}
+                <a href="{$url}" class="slide slide100">
+                  <span class="img">
+                    {if 'standard' | mobiledetect?}
+                      <img src="/files/{$image}" alt="" height="570" width="1440">
+                    {else}
+                      <img src="/files/{$image_mob}" alt="" height="480" width="480">
+                    {/if}
+                  </span>
+                </a>
+              {/foreach}
+            </div>
+          </div>
+        {/if}
+      </div>
+    </section>
+
+    {include 'banners_block'}
+    {include 'seen_it_before'}
+    {include 'advantages'}
+    {include 'our_brands'}
+    {include 'main_catalog'}
+    {*include 'main_catalog_plitka'*}
+    <section class="section- section-blogs-news bg-cbg">
+      <div class="container">
+        <div class="column column50">
+          {if $_modx->config.cultureKey != 'ru'}
+            {set $articles = $_modx->runSnippet(
+            'pdoResources',
+            [
+              'elementClass' => 'modSnippet',
+              'parents' => 162,
+              'tpl' => 'tplBlog',
+              'depth' => 0,
+              'limit' => 4,
+              'sortby' => 'publishedon',
+              'sortdir' => 'DESC',
+              'tvPrefix' => '',
+              'includeContent' => 1,
+              'includeTVs' => 'img',
+              'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+              "localizator.resource_id = modResource.id"}}',
+              'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+              'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+            ]
+          )}
+          {else}
+            {set $articles = $_modx->runSnippet(
+            'pdoResources',
+              [
+              'elementClass' => 'modSnippet',
+              'parents' => 162,
+              'tpl' => 'tplBlog',
+              'depth' => 0,
+              'limit' => 4,
+              'sortby' => 'publishedon',
+              'sortdir' => 'DESC',
+              'tvPrefix' => '',
+              'includeContent' => 1,
+              'includeTVs' => 'img'
+              ]
+            )}
+          {/if}
+          {if $articles?}
+            <div class="section-caption">
+              <div class="caption">
+                <span>{$_modx->lexicon('article_title')}</span>
+              </div>
+              <div class="seeall-block">
+                <a href="{$_modx->makeUrl(162)}" class="seeall">
+                  <span>{$_modx->lexicon('all_articles')}</span>
+                </a>
+              </div>
+            </div>
+            <div class="blogs-block">
+              <ul class="blogs">
+                {$articles}
+              </ul>
+            </div>
+          {/if}
+        </div>
+        <div class="column column50">
+          {if $_modx->config.cultureKey != 'ru'}
+            {set $news = $_modx->runSnippet(
+            'pdoResources',
+              [
+              'elementClass' => 'modSnippet',
+              'parents' => 163,
+              'tpl' => 'tplNews',
+              'depth' => 0,
+              'limit' => 6,
+              'sortby' => 'publishedon',
+              'sortdir' => 'DESC',
+              'tvPrefix' => '',
+              'includeContent' => 1,
+              'includeTVs' => 'img',
+              'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+              "localizator.resource_id = modResource.id"}}',
+              'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+              'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+              ]
+            )}
+          {else}
+            {set $news = $_modx->runSnippet(
+            'pdoResources',
+            [
+              'elementClass' => 'modSnippet',
+              'parents' => 163,
+              'tpl' => 'tplNews',
+              'depth' => 0,
+              'limit' => 6,
+              'sortby' => 'publishedon',
+              'sortdir' => 'DESC',
+              'tvPrefix' => '',
+              'includeContent' => 1,
+              'includeTVs' => 'img'
+            ]
+            )}
+          {/if}
+          {if $news?}
+            <div class="section-caption">
+              <div class="caption">
+                <span>{$_modx->lexicon('news_title')}</span>
+              </div>
+              <div class="seeall-block">
+                <a href="{$_modx->makeUrl(163)}" class="seeall">
+                  <span>{$_modx->lexicon('all_news')}</span>
+                </a>
+              </div>
+
+            </div>
+            <div class="news-block">
+              <ul class="news">
+                {$news}
+              </ul>
+            </div>
+          {/if}
+        </div>
+      </div>
+    </section>
+    {if $_modx->config.cultureKey != 'ru'}
+      {set $services = $_modx->runSnippet(
+      'pdoResources',
+      [
+        'elementClass' => 'modSnippet',
+        'parents' => 29281,
+        'tpl' => 'tplServices',
+        'depth' => 0,
+        'limit' => 4,
+        'sortby' => 'menuindex',
+        'sortdir' => '',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img,service_price',
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+        "localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+      ]
+    )}
+    {else}
+      {set $services = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => 29281,
+        'tpl' => 'tplServices',
+        'depth' => 0,
+        'limit' => 4,
+        'sortby' => 'menuindex',
+        'sortdir' => '',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img,service_price'
+        ]
+      )}
+    {/if}
+    {if $services?}
+      <section class="section- section-services">
+        <div class="container">
+          <div class="section-caption">
+            <div class="caption">
+              <span>{$_modx->lexicon('our_services')}</span>
+            </div>
+            <div class="seeall-block">
+              <a href="{$_modx->makeUrl(29281)}" class="seeall">
+                <span>{$_modx->lexicon('all_services')}</span>
+              </a>
+            </div>
+          </div>
+          <div class="services-block">
+            <ul class="services">
+              {$services}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {/if}
+
+    {if 'standard' | mobiledetect?}
+      {set $items_on_category_page = 10}
+    {else}
+      {set $items_on_category_page = 5}
+    {/if}
+
+    {if $_modx->config.cultureKey != 'ru'}
+      {set $sale_items = $_modx->runSnippet(
+      'msProducts',
+        [
+        'tpl'=>'tplProduct',
+        'includeThumbs' => 'small,small_mobile',
+        'parents' => 160,
+        'includeTVs' => 'video',
+        'sortby' => 'RAND()',
+        'depth' => 5,
+        'showLog' => 0,
+        'limit' => "{$items_on_category_page}",
+        'showZeroPrice' => 0,
+        'includeContent' => 1,
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+        'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+        'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '","Data.availability":"1","Data.favorite":"1"}',
+        ]
+      )}
+    {else}
+      {set $sale_items = $_modx->runSnippet(
+      'msProducts',
+        [
+        'tpl'=>'tplProduct',
+        'includeThumbs' => 'small,small_mobile',
+        'parents' => 160,
+        'includeTVs' => 'video',
+        'sortby' => 'RAND()',
+        'depth' => 5,
+        'showLog' => 0,
+        'limit' => "{$items_on_category_page}",
+        'showZeroPrice' => 0,
+        'includeContent' => 1,
+        'where' => '{"Data.availability":"1","Data.favorite":"1"}'
+        ]
+      )}
+    {/if}
+    {if $sale_items?}
+      <section class="section- section-products bg-cbg">
+        <div class="container">
+          <div class="section-caption">
+            <div class="caption">
+              <span>{$_modx->lexicon('sale_item')}</span>
+            </div>
+          </div>
+          <div class="products-block">
+            <ul class="products responsive-products">
+              {$sale_items}
+            </ul>
+          </div>
+        </div>
+      </section>
+      <hr>
+    {/if}
+
+    {if $_modx->config.cultureKey != 'ru'}
+      {set $new_items = $_modx->runSnippet(
+      'msProducts',
+        [
+        'tpl'=>'tplProduct',
+        'includeThumbs' => 'small,small_mobile',
+        'parents' => 160,
+        'includeTVs' => 'video',
+        'sortby' => 'RAND()',
+        'depth' => 5,
+        'showLog' => 0,
+        'limit' => "{$items_on_category_page}",
+        'showZeroPrice' => 0,
+        'includeContent' => 1,
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+        'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+        'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '","Data.availability":"1","Data.new":"1"}',
+        ]
+      )}
+    {else}
+      {set $new_items = $_modx->runSnippet(
+      'msProducts',
+      [
+        'tpl'=>'tplProduct',
+        'includeThumbs' => 'small,small_mobile',
+        'parents' => 160,
+        'includeTVs' => 'video',
+        'sortby' => 'RAND()',
+        'depth' => 5,
+        'showLog' => 0,
+        'limit' => "{$items_on_category_page}",
+        'showZeroPrice' => 0,
+        'includeContent' => 1,
+        'where' => '{"Data.availability":"1","Data.new":"1"}'
+      ]
+      )}
+    {/if}
+    {if $new_items?}
+      <section class="section- section-products">
+        <div class="container">
+          <div class="section-caption">
+            <div class="caption">
+              <span>{$_modx->lexicon('new_item')}</span>
+            </div>
+          </div>
+          <div class="products-block">
+            <ul class="products responsive-products">
+              {$new_items}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {/if}
+
+    <section class="section- section-content">
+      <div class="container">
+        <h1>{$_modx->runSnippet('metaTagsh1')}</h1>
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

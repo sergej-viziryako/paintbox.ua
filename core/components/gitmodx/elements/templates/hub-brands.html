@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-brands">
+      <div class="container">
+        <div class="brands-block">
+          <ul class="brands">
+            {if $_modx->config.cultureKey != 'ru'}
+              {$_modx->runSnippet('!pdoPage',
+              [
+                'elementClass' => 'modSnippet',
+                'parents' => "{$_modx->resource.id}",
+                'tpl' => 'tplBrands',
+                'depth' => 1,
+                'limit' => 20,
+                'includeTVs' => 'img',
+                'tvPrefix' => '',
+                'sortby' => 'menuindex',
+                'sortdir' => '',
+                'includeContent' => 1,
+                'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                'tplPageFirst' => '@INLINE  ',
+                'tplPageFirstEmpty' => '@INLINE  ',
+                'tplPageLast' => '@INLINE  ',
+                'tplPageLastEmpty' => '@INLINE  ',
+                'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>',
+                'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+                "localizator.resource_id = modResource.id"}}',
+                'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+                'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+              ]
+            )}
+            {else}
+              {$_modx->runSnippet('!pdoPage',
+                [
+                  'elementClass' => 'modSnippet',
+                  'parents' => "{$_modx->resource.id}",
+                  'tpl' => 'tplBrands',
+                  'depth' => 1,
+                  'limit' => 20,
+                  'includeTVs' => 'img',
+                  'tvPrefix' => '',
+                  'sortby' => 'menuindex',
+                  'sortdir' => '',
+                  'includeContent' => 1,
+                  'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                  'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                  'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                  'tplPageFirst' => '@INLINE  ',
+                  'tplPageFirstEmpty' => '@INLINE  ',
+                  'tplPageLast' => '@INLINE  ',
+                  'tplPageLastEmpty' => '@INLINE  ',
+                  'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                  'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                  'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                  'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+                ]
+              )}
+            {/if}
+          </ul>
+        </div>
+        <div class="pagination-block">
+          {$_modx->getPlaceholder('page.nav')}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

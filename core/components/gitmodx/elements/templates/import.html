@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {include 'head'}
+
+  <style>
+    table { width:1000px;border-collapse:separate;border-spacing:1px;border:0; table-layout:fixed;}
+    table td { font-size:15px;padding:0px;border:0;}
+  </style>
+
+</head>
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-thanks popup-holder-filter">
+<div id="wrapper">
+  <section class="section- section-content">
+    <div class="container">
+      <div class="content">
+        {if $_modx->user.id > 0}
+          {$_modx->runSnippet('optionLang')}
+        {/if}
+      </div>
+    </div>
+  </section>
+  <section class="section- section-prefooter">
+  </section>
+</div>
+</body>
+</html>
+
+
+

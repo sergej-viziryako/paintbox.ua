@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {include 'head'}
+</head>
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+  
+    {if $.get.source == 'one'}
+      {$_modx->runSnippet('!oneClickOrderCartRedirect',['id'=>140])}
+    {/if}
+    
+    {*$_modx->runSnippet('!msOrder', ['tpl' =>'tplMsOrderSite'])*}
+    {$_modx->runSnippet('!msNovaPoshta.Order', ['theme' =>'default','tpl' =>'tplNovaPoshtaOrder'])}
+    {$_modx->runSnippet('!msGetOrder',['tpl'=>'tplMsGetOrdersite', 'showLog' => 0])}
+    {$_modx->runSnippet('!msCart',['tpl'=>'tplMsCartSiteNone'])}
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+{$_modx->runSnippet('!msGetOrder',[ 'tpl'=>'cartOrderCommerce'])}
+
+
+<script>
+  function hideaddress(){
+    if ($('[name="delivery"]:checked').attr('id') == 'delivery_1') {
+      $(".address-block").hide();
+      $(".address-block-city").hide();
+    } else if  ($('[name="delivery"]:checked').attr('id') == 'delivery_3') {
+      $(".address-block").hide();
+      $(".address-block-city").show();
+    } else {
+      $(".address-block").show();
+      $(".address-block-city").show();
+      return false;
+    }
+  }
+
+  window.onload = function () {
+    hideaddress();
+  };
+
+  $(document).on('change', '[name="delivery"]', function() {
+    hideaddress();
+  })
+</script>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('input:radio[name="payment"]').change(function() {
+      if($(this).val() == '6'){
+        $('.prop_select_pp').stop().slideToggle(100).focus();
+      } else {
+        $('.prop_select_pp').css("display", "none");
+      }
+      if($(this).val() == '5') {
+        $('.prop_select_ii').stop().slideToggle(100).focus();
+      } else {
+        $('.prop_select_ii').css("display", "none");
+      }
+    } );
+
+    miniShop2.Callbacks.Cart.change.response.success = function(response) {
+      var payment_val = $('#termInputPP option:selected').val();
+      var ms2_total_cost = $(".ms2_total_cost").text();
+      var pricePP = parseFloat(ms2_total_cost.replace(/\s+/g, '')) / parseInt(payment_val.replace(/\s+/g, ''));
+
+      var priceII = parseFloat(ms2_total_cost.replace(/\s+/g, '')) / parseInt(payment_val.replace(/\s+/g, ''));
+      var price_percent = parseFloat(ms2_total_cost.replace(/\s+/g, '')) - (parseFloat(ms2_total_cost.replace(/\s+/g, '')) * 0.971);
+      var price_total = parseFloat(priceII) + parseFloat(price_percent);
+
+      //console.log(payment_val);
+      //console.log(ms2_total_cost.replace(/\s+/g, ''))
+      $("#payment_val_pp").text(payment_val);
+      $("#prop_permounth_pp").text(pricePP.toFixed(2));
+
+      $("#payment_val_ii").text(payment_val);
+      $("#prop_permounth_ii").text(price_total.toFixed(2));
+    };
+
+    $("select#termInputPP").change(function(e) {
+      e.preventDefault();
+      //var payment_atr = $('option:selected',this).attr('id');
+      var payment_val = $('option:selected',this).val();
+      var ms2_total_cost = $(".ms2_total_cost").text();
+      var pricePP = parseFloat(ms2_total_cost.replace(/\s+/g, '')) / parseInt(payment_val.replace(/\s+/g, ''));
+      //console.log(payment_val);
+      //console.log(ms2_total_cost.replace(/\s+/g, ''))
+      $("#payment_val_pp").text(payment_val);
+      $("#prop_permounth_pp").text(pricePP.toFixed(2));
+    });
+
+    $("select#termInputII").change(function(e) {
+      e.preventDefault();
+      var payment_val = $('option:selected',this).val();
+      var ms2_total_cost = $(".ms2_total_cost").text();
+      var priceII = parseFloat(ms2_total_cost.replace(/\s+/g, '')) / parseInt(payment_val.replace(/\s+/g, ''));
+      var price_percent = parseFloat(ms2_total_cost.replace(/\s+/g, '')) - (parseFloat(ms2_total_cost.replace(/\s+/g, '')) * 0.971);
+      var price_total = parseFloat(priceII) + parseFloat(price_percent);
+
+      //console.log('price_total '+ price_total.toFixed(2))
+      //console.log('priceII.toFixed(2) '+ priceII.toFixed(2))
+
+      $("#payment_val_ii").text(payment_val);
+      $("#prop_permounth_ii").text(price_total.toFixed(2));
+    });
+  });
+
+</script>
+
+
+<!--script>
+  $(document).ready(function() {
+    miniShop2.Callbacks.Order.submit.response.success = function(response) {
+      //var orderId = response.data.msorder;
+      var liqpay_url = response.data.liqpay_url;
+      var product_data = response.data.product_data;
+      var signature = response.data.signature;
+      //location.reload();
+      console.log('order success');
+      console.log(response.data['liqpay_url']);
+      console.log(response.data['msorder']);
+      $.post(liqpay_url, { data: product_data, signature: signature });
+    };
+  });
+</script-->
+
+</body>
+</html>

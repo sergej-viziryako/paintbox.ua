@@ -1,0 +1,150 @@
+{var $result = '!mSearch2' | snippet : [
+  'onlyIndex' => true,
+  'fields' => "{$mse2_fields | join : ','}",
+  'returnIds' => 1,
+  'limit' => 0,
+  'minQuery' => 2,
+  'where' => '{"template:IN":[20]}'
+] ?: '999999'}
+
+{if $_modx->config.cultureKey != 'ru'}
+  {set $products_results = $_modx->runSnippet('!mFilter2Numberfield', [
+    'element' => 'msProducts',
+    'paginator' => 'pdoPage',
+    'parents' => 160,
+    'resources' => "{$result}",
+    'limit' => 12,
+    'maxLimit' => 0,
+    'depth' => 5,
+    'tplWrapper' => 'tplOutresult',
+    'tplOuter' => 'tplMfilter2Outer',
+    'tplFilter.outer.default' => 'tplMfilter2FilterOuter',
+    'tplFilter.row.default' => 'tplMfilter2FilterCheckbox',
+    'tplFilter.outer.ms|price' => 'tplMfilter2Slider',
+    'tplFilter.row.ms|price' => 'tplMfilter2Number',
+    'aliases' => 'ms|vendor==vendor,resource|parent==parent,'~$_modx->runSnippet('categoryOptionsAlias')~'',
+    'suggestions' => 1,
+    'tpls' => 'tplProduct',
+    'sortby' => '',
+    'includeThumbs' => 'small,small_mobile',
+    'includeTVs' => 'video',
+    'includeContent' => 1,
+    'filters' => '
+    ms|price:number,
+    ms|vendor:vendors,
+    msoption|tags,
+    msoption|color,
+    parent:categories,
+    '~$_modx->runSnippet('categoryOptionsSearch')~',
+    ',
+    'values_delimeter' => '_',
+    'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+    'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+    'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '"}',
+    'class' => 'msProduct',
+    'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}&nbsp;{$pages}&nbsp;{$next}</ul>',
+    'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+    'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+    'tplPageFirst' => '@INLINE  ',
+    'tplPageFirstEmpty' => '@INLINE  ',
+    'tplPageLast' => '@INLINE  ',
+    'tplPageLastEmpty' => '@INLINE  ',
+    'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+    'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+    'tplPagePrevEmpty' => '@INLINE  <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+    'tplPageNextEmpty' => '@INLINE  <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>'
+  ]
+  )}
+{else}
+  {set $products_results = $_modx->runSnippet('!mFilter2Numberfield', [
+    'element' => 'msProducts',
+    'paginator' => 'pdoPage',
+    'parents' => 160,
+    'resources' => "{$result}",
+    'limit' => 12,
+    'maxLimit' => 0,
+    'depth' => 5,
+    'showEmptyFilters' => 0,
+    'suggestionsSliders' => 1,
+    'tplWrapper' => 'tplOutresult',
+    'tplOuter' => 'tplMfilter2Outer',
+    'tplFilter.outer.default' => 'tplMfilter2FilterOuter',
+    'tplFilter.row.default' => 'tplMfilter2FilterCheckbox',
+    'tplFilter.outer.ms|price' => 'tplMfilter2Slider',
+    'tplFilter.row.ms|price' => 'tplMfilter2Number',
+    'aliases' => 'ms|vendor==vendor,resource|parent==parent,'~$_modx->runSnippet('categoryOptionsAlias')~'',
+    'suggestions' => 1,
+    'tpls' => 'tplProduct',
+    'sortby' => '',
+    'includeThumbs' => 'small,small_mobile',
+    'includeTVs' => 'video',
+    'includeContent' => 1,
+    'filters' => '
+    ms|price:number,
+    ms|vendor:vendors,
+    msoption|tags,
+    msoption|color,
+    parent:categories,
+    '~$_modx->runSnippet('categoryOptionsSearch')~',
+    ',
+    'values_delimeter' => '_',
+    'class' => 'msProduct',
+    'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+    'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+    'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+    'tplPageFirst' => '@INLINE  ',
+    'tplPageFirstEmpty' => '@INLINE  ',
+    'tplPageLast' => '@INLINE  ',
+    'tplPageLastEmpty' => '@INLINE  ',
+    'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+    'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+    'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+    'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+  ]
+  )}
+{/if}
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks popup-holder-filter" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+
+    {if $result == 999999}
+      <section class="section- section-content">
+        <div class="container">
+          <div class="notfound-block">
+            <div class="notfound">
+              <div class="img">
+                <i class="icon-search"></i>
+              </div>
+              <div class="text">
+                <div class="caption">
+                  {$_modx->lexicon('search_nothing_found')}
+                </div>
+                <p>
+                  {$_modx->lexicon('search_nothing_found_desc')} - <a href="#" class="open-popup open-callback">{$_modx->lexicon('leave_your_phone_button')}</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {else}
+      <section class="section- section-products section-filter">
+        {$products_results}
+      </section>
+    {/if}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+{include 'ajax_init_on_page'}
+</body>
+</html>

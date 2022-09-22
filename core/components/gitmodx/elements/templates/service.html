@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-reviews">
+      <div class="container">
+        <div class="column column70">
+          <div class="container">
+            <div class="content">
+              {if $_modx->config.cultureKey != 'ru'}
+                {$_modx->resource.localizator_content}
+              {else}
+                {$_modx->resource.content}
+              {/if}
+            </div>
+          </div>
+        </div>
+        <div class="column column30">
+          <div class="call-measures-block">
+            <div class="caption-form">
+              <span>{$_modx->lexicon('service_form_title')}</span>
+            </div>
+            <div class="description-form">
+              <p>{$_modx->lexicon('service_form_desc')}</p>
+            </div>
+            {if $_modx->resource.service_price?}
+              <div class="block block-info">
+                <div class="view cell">
+                  <i class="icon-eye"></i>
+                  <span>{$_modx->lexicon('service_price_desc_form')}: <span>{$_modx->resource.service_price}</span> грн</span>
+                </div>
+              </div>
+            {/if}
+            <div class="call-measures">
+              {$_modx->runSnippet(
+              '!AjaxForm',
+                [
+                  'snippet' => 'FormIt',
+                  'form' => 'tplAjaxForService',
+                  'formName' => 'Форма заказа услуги',
+                  'formFields' => 'name,phone',
+                  'fieldNames' => 'name==Имя,phone==Телефон',
+                  'hooks' => 'FormItSaveForm,email,telegrambot',
+                  'emailSubject' => "Форма заказа услуги с {$_modx->config.form_site_name}",
+                  'emailTo' => "{$_modx->config.email_sender}",
+                  'emailTpl' => 'tplOrderFormService',
+                  'emailFrom' => '{$_modx->config.from_email_sender}',
+                  'validate' => 'name:required,phone:required',
+                  'validationErrorMessage' => 'В форме есть ошибка!',
+                  'successMessage' => 'Заявка отправлена'
+                ]
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {include 'faq'}
+
+    {if $_modx->config.cultureKey != 'ru'}
+      {set $services = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.parent}",
+        'resources' => "-{$_modx->resource.id}",
+        'tpl' => 'tplServices',
+        'depth' => 1,
+        'limit' => 0,
+        'sortby' => 'menuindex',
+        'sortdir' => '',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img,service_price',
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+        "localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+        ]
+      )}
+    {else}
+      {set $services = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.parent}",
+        'resources' => "-{$_modx->resource.id}",
+        'tpl' => 'tplServices',
+        'depth' => 1,
+        'limit' => 0,
+        'sortby' => 'menuindex',
+        'sortdir' => '',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img,service_price'
+        ]
+      )}
+    {/if}
+    {if $services?}
+      <section class="section- section-services bg-cbg">
+        <div class="container">
+          <div class="section-caption">
+            <div class="caption">
+              <span>{$_modx->lexicon('our_other_services')}</span>
+            </div>
+          </div>
+          <div class="services-block">
+            <ul class="services">
+              {$services}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {/if}
+    <hr>
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

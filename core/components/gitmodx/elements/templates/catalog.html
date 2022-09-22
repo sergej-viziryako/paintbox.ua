@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    {include 'main_catalog'}
+    {include 'faq'}
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

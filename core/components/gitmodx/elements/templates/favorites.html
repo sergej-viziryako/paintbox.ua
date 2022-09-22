@@ -1,0 +1,72 @@
+{set $favoriter_product = '!msFavoriter' | snippet}
+{if $_modx->config.cultureKey != 'ru'}
+{set $products = $_modx->runSnippet(
+'msProducts',
+[
+  'tpl'=>'tplProductFavorite',
+  'includeThumbs' => 'small,small_mobile',
+  'parents' => 160,
+  'resources' => "1,{$favoriter_product}",
+  'depth' => 5,
+  'showLog' => 0,
+  'limit' => 0,
+  'showZeroPrice' => 0,
+  'includeContent' => 1,
+  'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+  'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+  'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '"}'
+]
+)}
+{else}
+{set $products = $_modx->runSnippet(
+'msProducts',
+[
+  'tpl'=>'tplProductFavorite',
+  'includeThumbs' => 'small,small_mobile',
+  'parents' => 160,
+  'resources' => "1,{$favoriter_product}",
+  'depth' => 5,
+  'showLog' => 0,
+  'limit' => 0,
+  'showZeroPrice' => 0,
+  'includeContent' => 1,
+]
+)}
+{/if}
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks popup-holder-filter" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-filter">
+      <div class="container">
+        <div class="column column100">
+          <div class="favoriter-count products-block">
+            {if $products?}
+              <ul class="products products-favorites">
+                {$products}
+              </ul>
+            {/if}
+            <div class="favoriter-count-section active">
+              {include 'category_nothing_found_favorite'}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+{include 'ajax_init_on_page'}
+</body>
+</html>

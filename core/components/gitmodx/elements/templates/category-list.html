@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {include 'head'}
+</head>
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+      {if $_modx->config.cultureKey != 'ru'}
+      {set $categories = $_modx->runSnippet('!pdoPage',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.id}",
+        'tpl' => 'tplSubCategoriesList',
+        'depth' => 0,
+        'limit' => 0,
+        'templates' => "21,24",
+        'includeTVs' => 'img',
+        'tvPrefix' => '',
+        'sortby' => 'menuindex',
+        'sortdir' => 'ASC',
+        'includeContent' => 1,
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+        "localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+        ]
+      )}
+    {else}
+      {set $categories = $_modx->runSnippet('!pdoPage',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.id}",
+        'tpl' => 'tplSubCategoriesList',
+        'depth' => 0,
+        'limit' => 0,
+        'templates' => "21,24",
+        'includeTVs' => 'img',
+        'tvPrefix' => '',
+        'sortby' => 'menuindex',
+        'sortdir' => 'ASC',
+        'includeContent' => 1
+        ]
+      )}
+    {/if}
+    {if $categories?}
+      <section class="section- section-category-list">
+        <div class="container">
+          <div class="category-list-block">
+            <ul class="category-list">
+              {$categories}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {else}
+      {include 'category_nothing_found'}
+    {/if}
+    {if !$.get.page}
+      <section class="section- section-content">
+        <div class="container">
+          <div class="content">
+            {if $_modx->config.cultureKey != 'ru'}
+              {$_modx->resource.localizator_content}
+            {else}
+              {$_modx->resource.content}
+            {/if}
+          </div>
+        </div>
+        {include 'product_table'}
+      </section>
+    {/if}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

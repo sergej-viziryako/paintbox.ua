@@ -1,0 +1,521 @@
+{set $ticketcount = $_modx->runSnippet('!ticketView', ['id' => "{$_modx->resource.id}"])}
+{$_modx->runSnippet('!getRaitingViewId',['id' => "{$_modx->resource.id}"])}
+{set $item_characteristics = $_modx->runSnippet('msProductOptionsCategory',['tpl' => 'tplProductOptionsCategory'])}
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks popup-holder-credit" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-cardproduct">
+      <div class="container">
+        <div class="cardproduct">
+          <div class="column column100">
+            <div class="column column50">
+              <div class="photovideogallery  {if $availability == 0 OR $price == 0}notavailable{/if}">
+                {include 'status_block'}
+                {include 'tooltip_block'}
+                {$_modx->runSnippet('!msGallery',['tpl'=>'tplMsGallerySite'])}
+              </div>
+            </div>
+            <div class="column column50 columnbuy">
+              <div class="buyproduct {if $availability == 0 OR $price == 0}notavailable{/if}">
+                <div class="row">
+                  <div class="block vendor-avail-block">
+                    <div class="vendor-block">
+                      {if $article?}
+                      <div class="vendor">
+                        {$_modx->lexicon('article')}: <span>{$article}</span>
+                      </div>
+                      {/if}
+                    </div>
+                    <div class="avail-block">
+                      <div class="avail">
+                        <i class="icon-checked-1"></i>
+                        {if $availability? AND $price > 0}
+                        <span>{$_modx->lexicon('available')}</span>
+                        {else}
+                        <span>{$_modx->lexicon('not_available')}</span>
+                        {/if}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {*<div class="row row-cell">
+                <div class="block">
+                  <div class="cell">
+                    <div class="caption">
+                      <span>Цвет:</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <span style="background: #000;"></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="active">
+                          <span style="background: green;"></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <span style="background: pink;"></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <span style="background: gold;"></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="cell">
+                    <div class="caption">
+                      <span>Размер:</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <span>128 Gb</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="active">
+                          <span>256 Gb</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <span>512256 Gb</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>*}
+
+                <form class="ms2_form -form" method="post">
+                  <input type="hidden" name="id" value="{$_modx->resource.id}"/>
+
+                  {set $options_color = $_modx->runSnippet( '!msOptions', [ 'options' => 'color', 'tpl' => 'tplMsOptions' ] )}
+                  {set $options_size = $_modx->runSnippet( '!msOptions', [ 'options' => 'size', 'tpl' => 'tplMsOptions' ] )}
+
+                  {if $options_color != '' OR $options_size != ''}
+                  <div class="row">
+                    <div class="block feature-block">
+                      <div class="feature">
+                        {$_modx->runSnippet( '!msOptions', [ 'options' => 'color', 'tpl' => 'tplMsOptions' ] )}
+                        {$_modx->runSnippet( '!msOptions', [ 'options' => 'size', 'tpl' => 'tplMsOptions' ] )}
+                      </div>
+                    </div>
+                  </div>
+                  {/if}
+
+                  <div class="row">
+                    <div class="block price-number-buy-block">
+                      <div class="price-block">
+                        {if $price > 0}
+                        {if $old_price? AND $old_price > $price}
+                        <div class="price old">
+                          <span>{$old_price} грн</span>
+                        </div>
+                        {/if}
+                        <div class="price">
+                          <span>{$price} грн</span>
+                        </div>
+                        {/if}
+                      </div>
+                      <div class="number-block">
+                        <div class="number quantity">
+                          <input class="numeral" name="count" type="number" min="1" step="1" value="1">
+                        </div>
+                      </div>
+                      {if $availability? AND $price > 0}
+                      <div class="buy-block">
+                        <button type="submit" class="buy" name="ms2_action" value="cart/add">
+                          <i class="icon icon-shopping-bag"></i>
+                          <span>{$_modx->lexicon('buy_button')}</span>
+                        </button>
+                        {if $_modx->config.include_credit_pp == 1 || $_modx->config.include_credit_ii == 1 || $_modx->config.include_credit_mb == 1}
+                          <a href="#" class="callback open-popup open-credit credit-link">{$_modx->lexicon('credit_buy_button')}</a>
+                        {/if}
+                      </div>
+                      {else}
+                      <div class="buy-block">
+                        <a href="#" class="buy open-popup open-contacts">
+                          <i class="icon-phone-call"></i>
+                          <span>{$_modx->lexicon('when_item_available_button')}</span>
+                        </a>
+                      </div>
+                      {/if}
+                    </div>
+                  </div>
+                </form>
+                {if $availability? AND $price > 0}
+                  {$_modx->runSnippet(
+                  '!AjaxForm',
+                  [
+                  'snippet' => 'quickOrder',
+                  'form' => 'tplBuyFormOneClick'
+                  ]
+                  )}
+                {/if}
+                <div class="row">
+                  <div class="block links-block">
+                    <ul class="links">
+                      {'!AddComparison' | snippet : ['list_id' => 29103, 'id' => "{$id}", 'tpl' => 'tplComparisonaddSiteProduct', 'minItems' => 7]}
+  
+                      <li class="msFavoriterToggle {(!$.session.msFavoriter[$_modx->resource.id]) ?: 'active'}" data-id="{$_modx->resource.id}">
+                        <a href="#">
+                          <i class="icon-heart"></i>
+                          <span>{$_modx->lexicon('favorite_buton')}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#reviews">
+                          <i class="icon-speech-bubble-5"></i>
+                          <span>{$ticketcount == ''? '0': $ticketcount}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#reviews">
+                          <i class="icon-star"></i>
+                          <span>{$raiting = $_modx->getPlaceholder('aggregate_raiting')}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {if $_modx->config.cultureKey != 'ru'}
+                {set $introtext = $_modx->resource.introtext?:$_modx->resource.localizator_content}
+                {set $content = $_modx->resource.localizator_content}
+                {else}
+                {set $introtext = $_modx->resource.introtext?:$_modx->resource.content}
+                {set $content = $_modx->resource.content}
+                {/if}
+                {if $introtext?}
+                <div class="row">
+                  <div class="block description-block">
+                    <div class="caption">
+                      <span>{$_modx->lexicon('item_description')}:</span>
+                    </div>
+                    <div class="description">
+                      {$introtext | notags | truncate : 300}
+                    </div>
+                    {if $content?}
+                    <a href="{$_modx->makeUrl($_modx->resource.id)}#content" class="more">
+                      <i class="icon-file"></i>
+                      <span>{$_modx->lexicon('item_all_description')}</span>
+                    </a>
+                    {/if}
+                  </div>
+                </div>
+                {/if}
+                <div class="row">
+                  <div class="block feature-block">
+                    <div class="feature">
+                      {include 'base_characteristics_output'}
+                    </div>
+                    {if $item_characteristics?}
+                    <div class="block more-block">
+                      <a href="{$_modx->makeUrl($_modx->resource.id)}#feature" class="more">
+                        <i class="icon-sheet"></i>
+                        <span>{$_modx->lexicon('item_all_characteristics')}</span>
+                      </a>
+                    </div>
+                    {/if}
+                  </div>
+                </div>
+
+                {set $files = json_decode($_modx->resource.files, true)}
+                {if $_modx->resource.files?}
+                  <div class="row">
+                    <div class="block files-block">
+                      <div class="caption">
+                        <span>{$_modx->lexicon('item_files')}:</span>
+                      </div>
+                      <ul class="files">
+                        {foreach $files as $row}
+                          <li>
+                            <a href="/files/{$row.image}" target="_blank">
+                              <i class="icon-download"></i>
+                              {if $_modx->config.cultureKey != 'ru'}
+                                <span>{$row.description_ukr}</span>
+                              {else}
+                                <span>{$row.description}</span>
+                              {/if}
+                            </a>
+                          </li>
+                        {/foreach}
+                      </ul>
+                    </div>
+                  </div>
+                {/if}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {if $availability == 0 OR $price == 0}
+    {include 'other_category_items'}
+    {/if}
+    {if $content?}
+    <section class="section- section-content" id="content">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <i class="icon-file"></i>
+            <span>{$_modx->lexicon('item_description')}</span>
+          </div>
+        </div>
+        <div class="content-block">
+          <div class="content">
+            {$content}
+          </div>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    {if $item_characteristics?}
+    <section class="section- section-content section-feature bg-cbg" id="feature">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <i class="icon-sheet"></i>
+            <span>{$_modx->lexicon('item_characteristics')}</span>
+          </div>
+        </div>
+        <div class="content-block">
+          <div class="content">
+            <div class="feature">
+              {$item_characteristics}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    {set $related_services = $_modx->resource.parent | resource : 'related_services'}
+    {if $related_services?}
+    <section class="section- section-services" id="services">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <i class="icon-settings"></i>
+            <span>{$_modx->lexicon('related_services')}</span>
+          </div>
+        </div>
+        <div class="services-block">
+          <ul class="services">
+            {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->runSnippet(
+            'pdoResources',
+            [
+            'elementClass' => 'modSnippet',
+            'parents' => 29281,
+            'tpl' => 'tplServices',
+            'resources' => "1, {$related_services}",
+            'depth' => 0,
+            'limit' => 4,
+            'sortby' => 'publishedon',
+            'sortdir' => 'ASC',
+            'tvPrefix' => '',
+            'includeContent' => 1,
+            'includeTVs' => 'img,service_price',
+            'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+            "localizator.resource_id = modResource.id"}}',
+            'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+            'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+            ]
+            )}
+            {else}
+            {$_modx->runSnippet(
+            'pdoResources',
+            [
+            'elementClass' => 'modSnippet',
+            'parents' => 29281,
+            'tpl' => 'tplServices',
+            'resources' => "1, {$related_services}",
+            'depth' => 0,
+            'limit' => 4,
+            'sortby' => 'publishedon',
+            'sortdir' => 'ASC',
+            'tvPrefix' => '',
+            'includeContent' => 1,
+            'includeTVs' => 'img,service_price'
+            ]
+            )}
+            {/if}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    {set $category_related_items = $_modx->resource.parent | resource : 'related_items'}
+    {if $_modx->config.cultureKey != 'ru'}
+    {set $related_items = $_modx->runSnippet(
+    'msProducts',
+    [
+    'tpl'=>'tplProduct',
+    'includeThumbs' => 'small,small_mobile',
+    'parents' => 160,
+    'resources' => "1,{$category_related_items}",
+    'includeTVs' => 'video',
+    'sortby' => 'RAND()',
+    'depth' => 5,
+    'showLog' => 0,
+    'limit' => 10,
+    'showZeroPrice' => 0,
+    'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+    'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+    'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '","Data.availability":"1"}',
+    ]
+    )}
+    {else}
+    {set $related_items = $_modx->runSnippet(
+    'msProducts',
+    [
+    'tpl'=>'tplProduct',
+    'includeThumbs' => 'small,small_mobile',
+    'parents' => 160,
+    'resources' => "1,{$category_related_items}",
+    'includeTVs' => 'video',
+    'sortby' => 'RAND()',
+    'depth' => 5,
+    'showLog' => 0,
+    'limit' => 10,
+    'showZeroPrice' => 0,
+    'where' => '{"Data.availability":"1"}'
+    ]
+    )}
+    {/if}
+    {if $related_items?}
+    <section class="section- section-products">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <span>{$_modx->lexicon('related_items')}</span>
+          </div>
+        </div>
+        <div class="products-block">
+          <ul class="products responsive-products">
+            {$related_items}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    <section class="section- section-reviews bg-cbg" id="reviews">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <i class="icon-chat"></i>
+            <span>{$_modx->lexicon('item_review')} <span class="number">{$ticketcount == ''? '': $ticketcount}</span></span>
+          </div>
+        </div>
+        {$_modx->runSnippet(
+        '!TicketComments',
+        [
+        'allowGuest' => '1',
+        'tplComments' => 'tplTicketsCommentWrapperItem',
+        'tplCommentFormGuest' => 'tplTicketsCommentFormSite',
+        'tplCommentForm' => 'tplTicketsCommentFormLogin',
+        'tplCommentAuth' => 'tplTicketsCommentOneAuthSite',
+        'formBefore' => 0,
+        'autoPublish' => 0,
+        'autoPublishGuest' => 0,
+        'enableCaptcha' => 0
+        ]
+        )}
+      </div>
+    </section>
+
+    {if $availability?}
+    {include 'other_category_items'}
+    {/if}
+
+    {set $related_articles = $_modx->resource.parent | resource : 'related_articles'}
+    {if $_modx->config.cultureKey != 'ru'}
+    {set $rel_articles = $_modx->runSnippet(
+    'pdoResources',
+    [
+    'elementClass' => 'modSnippet',
+    'parents' => 162,
+    'tpl' => 'tplBlog',
+    'resources' => "1, {$related_articles}",
+    'depth' => 0,
+    'sortby' => 'publishedon',
+    'sortdir' => 'ASC',
+    'tvPrefix' => '',
+    'includeContent' => 1,
+    'includeTVs' => 'img,service_price',
+    'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+    "localizator.resource_id = modResource.id"}}',
+    'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+    'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+    ]
+    )}
+    {else}
+    {set $rel_articles = $_modx->runSnippet(
+    'pdoResources',
+    [
+    'elementClass' => 'modSnippet',
+    'parents' => 162,
+    'tpl' => 'tplBlog',
+    'resources' => "1, {$related_articles}",
+    'depth' => 0,
+    'sortby' => 'publishedon',
+    'sortdir' => 'ASC',
+    'tvPrefix' => '',
+    'includeContent' => 1,
+    'includeTVs' => 'img,service_price'
+    ]
+    )}
+    {/if}
+    {if $rel_articles?}
+    <section class="section- section-blogs">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <span>{$_modx->lexicon('item_related_articles')}</span>
+          </div>
+        </div>
+        <div class="blogs-block">
+          <ul class="blogs">
+            {$rel_articles}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {/if}
+    {include 'faq'}
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+
+<script>
+  $(document).on('af_complete', function(event,res) {
+    if(res.success) {
+      location.href = 'cart?source=one';
+    }
+  } );
+</script>
+</body>
+</html>

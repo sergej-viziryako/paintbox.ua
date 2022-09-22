@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-content section-sitemap">
+      <div class="container">
+        <div class="sitemap-block">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->runSnippet('!pdoPage',
+            [
+              'elementClass' => 'modSnippet',
+              'element' => 'pdoMenu',
+              'parents' => '2,160,164',
+              'resources' => '-1',
+              'templates' => '-20',
+              'level' => 0,
+              'displayStart' => 1,
+              'tpl' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>',
+              'tplStart' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>'
+              'tplOuter' => '@INLINE <ul class="sitemap">{$wrapper}</ul>',
+              'tplInner' => '@INLINE <ul>{$wrapper}</ul>',
+              'tvPrefix' => '',
+              'limit' => 25,
+              'sortby' => 'menuindex',
+              'includeContent' => 1,
+              'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+              'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+              'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+              'tplPageFirst' => '@INLINE  ',
+              'tplPageFirstEmpty' => '@INLINE  ',
+              'tplPageLast' => '@INLINE  ',
+              'tplPageLastEmpty' => '@INLINE  ',
+              'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+              'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+              'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+              'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>',
+              'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+              "localizator.resource_id = modResource.id"}}',
+              'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+              'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+            ]
+          )}
+          {else}
+            {$_modx->runSnippet('!pdoPage',
+              [
+              'elementClass' => 'modSnippet',
+              'element' => 'pdoMenu',
+              'parents' => '2,160,164',
+              'resources' => '-1',
+              'templates' => '-20',
+              'level' => 0,
+              'displayStart' => 1,
+              'tpl' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>',
+              'tplStart' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>'
+              'tplOuter' => '@INLINE <ul class="sitemap">{$wrapper}</ul>',
+              'tplInner' => '@INLINE <ul>{$wrapper}</ul>',
+              'tvPrefix' => '',
+              'limit' => 25,
+              'sortby' => 'menuindex',
+              'includeContent' => 1,
+              'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+              'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+              'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+              'tplPageFirst' => '@INLINE  ',
+              'tplPageFirstEmpty' => '@INLINE  ',
+              'tplPageLast' => '@INLINE  ',
+              'tplPageLastEmpty' => '@INLINE  ',
+              'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+              'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+              'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+              'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+              ]
+            )}
+          {/if}
+        </div>
+        <div class="pagination-block">
+          {$_modx->getPlaceholder('page.nav')}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

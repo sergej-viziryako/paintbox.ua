@@ -1,0 +1,201 @@
+{if $_modx->config.cultureKey != 'ru'}
+  {set $products = $_modx->runSnippet('!mFilter2Numberfield', [
+  'element' => 'msProducts',
+  'paginator' => 'pdoPage',
+  'parents' => 160,
+  'limit' => 12,
+  'maxLimit' => 0,
+  'depth' => 4,
+  'showEmptyFilters' => 0,
+  'suggestionsSliders' => 1,
+  'showZeroPrice' => 0,
+  'tplWrapper' => 'tplOutresult',
+  'tplOuter' => 'tplMfilter2Outer',
+  'tplFilter.outer.default' => 'tplMfilter2FilterOuter',
+  'tplFilter.row.default' => 'tplMfilter2FilterCheckbox',
+  'tplFilter.outer.ms|price' => 'tplMfilter2Slider',
+  'tplFilter.row.ms|price' => 'tplMfilter2Number',
+  'aliases' => 'ms|vendor==vendor,resource|parent==parent,'~$_modx->runSnippet('categoryOptionsAlias')~'',
+  'suggestions' => 1,
+  'tpls' => 'tplProduct',
+  'sortby' => '{"Data.availability":"DESC", "Data.price":"ASC"}',
+  'includeThumbs' => 'small,small_mobile',
+  'includeTVs' => 'video',
+  'includeContent' => 1,
+  'filters' => '
+  ms|price:number,
+  ms|vendor:vendors,
+  msoption|tags,
+  msoption|color,
+  msoption|size,
+  parent:categories,
+  '~$_modx->runSnippet('categoryOptions')~',
+  ',
+  'values_delimeter' => '_',
+  'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = msProduct.id"}}',
+  'select' => '{ "localizator" : "msProduct.*, localizator.*, msProduct.id" }',
+  'where' => '{ "localizator.key" : "' ~ ('localizator_key' | option) ~ '","Data.old_price:>":"0"}',
+  'class' => 'msProduct',
+  'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}&nbsp;{$pages}&nbsp;{$next}</ul>',
+  'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+  'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+  'tplPageFirst' => '@INLINE  ',
+  'tplPageFirstEmpty' => '@INLINE  ',
+  'tplPageLast' => '@INLINE  ',
+  'tplPageLastEmpty' => '@INLINE  ',
+  'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+  'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+  'tplPagePrevEmpty' => '@INLINE  <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+  'tplPageNextEmpty' => '@INLINE  <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>'
+  ]
+  )}
+{else}
+  {set $products = $_modx->runSnippet('!mFilter2Numberfield', [
+  'element' => 'msProducts',
+  'paginator' => 'pdoPage',
+  'parents' => 160,
+  'limit' => 12,
+  'maxLimit' => 0,
+  'depth' => 4,
+  'showEmptyFilters' => 0,
+  'suggestionsSliders' => 1,
+  'showZeroPrice' => 0,
+  'tplWrapper' => 'tplOutresult',
+  'tplOuter' => 'tplMfilter2Outer',
+  'tplFilter.outer.default' => 'tplMfilter2FilterOuter',
+  'tplFilter.row.default' => 'tplMfilter2FilterCheckbox',
+  'tplFilter.outer.ms|price' => 'tplMfilter2Slider',
+  'tplFilter.row.ms|price' => 'tplMfilter2Number',
+  'aliases' => 'ms|vendor==vendor,resource|parent==parent,'~$_modx->runSnippet('categoryOptionsAlias')~'',
+  'suggestions' => 1,
+  'tpls' => 'tplProduct',
+  'where' => '{"Data.old_price:>":"0"}',
+  'sortby' => '{"Data.availability":"DESC", "Data.price":"ASC"}',
+  'includeThumbs' => 'small,small_mobile',
+  'includeTVs' => 'video',
+  'includeContent' => 1,
+  'filters' => '
+  ms|price:number,
+  ms|vendor:vendors,
+  msoption|tags,
+  msoption|color,
+  msoption|size,
+  parent:categories,
+  '~$_modx->runSnippet('categoryOptions')~',
+  ',
+  'values_delimeter' => '_',
+  'class' => 'msProduct',
+  'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+  'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+  'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+  'tplPageFirst' => '@INLINE  ',
+  'tplPageFirstEmpty' => '@INLINE  ',
+  'tplPageLast' => '@INLINE  ',
+  'tplPageLastEmpty' => '@INLINE  ',
+  'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+  'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+  'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+  'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+  ]
+  )}
+{/if}
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks popup-holder-filter" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    {if $products?}
+    <section class="section- section-filter">
+      {$products}
+    </section>
+    {else}
+    {include 'category_nothing_found'}
+    {/if}
+
+    {if !$.get.page}
+    {include 'faq'}
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+          {$_modx->resource.localizator_content}
+          {else}
+          {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    {include 'product_table'}
+    {include 'products_reviews'}
+    {/if}
+
+    {set $related_articles = $_modx->resource.id | resource : 'related_articles'}
+    {if $_modx->config.cultureKey != 'ru'}
+    {set $rel_articles = $_modx->runSnippet(
+    'pdoResources',
+    [
+    'elementClass' => 'modSnippet',
+    'parents' => 162,
+    'tpl' => 'tplBlog',
+    'resources' => "1, {$related_articles}",
+    'depth' => 0,
+    'sortby' => 'publishedon',
+    'sortdir' => 'ASC',
+    'tvPrefix' => '',
+    'includeContent' => 1,
+    'includeTVs' => 'img,service_price',
+    'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+    "localizator.resource_id = modResource.id"}}',
+    'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+    'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+    ]
+    )}
+    {else}
+    {set $rel_articles = $_modx->runSnippet(
+    'pdoResources',
+    [
+    'elementClass' => 'modSnippet',
+    'parents' => 162,
+    'tpl' => 'tplBlog',
+    'resources' => "1, {$related_articles}",
+    'depth' => 0,
+    'sortby' => 'publishedon',
+    'sortdir' => 'ASC',
+    'tvPrefix' => '',
+    'includeContent' => 1,
+    'includeTVs' => 'img,service_price'
+    ]
+    )}
+    {/if}
+    {if $rel_articles?}
+    <section class="section- section-blogs">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <span>{$_modx->lexicon('item_related_articles')}</span>
+          </div>
+        </div>
+        <div class="blogs-block">
+          <ul class="blogs">
+            {$rel_articles}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    {include 'seen_it_before'}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+{include 'ajax_init_on_page'}
+</body>
+</html>

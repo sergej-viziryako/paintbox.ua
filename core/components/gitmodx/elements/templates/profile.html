@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    {if $_modx->resource.id == 404 || $_modx->resource.id == 406}
+      <section class="section- section-cabinet">
+        <div class="container">
+          {$_modx->runSnippet(
+          '!officeAuth',
+          [
+          'groups' => 'Users',
+          'tplLogin' => 'tplOfficeAuthLogin',
+          'loginResourceId' => 404,
+          'tplLogout' => 'tplOfficeAuthLogout'
+          ]
+          )}
+        </div>
+      </section>
+    {/if}
+    {if $_modx->resource.id == 405}
+      <section class="section- section-content section-registration">
+        <div class="container">
+          {$_modx->runSnippet(
+          '!officeAuth',
+          [
+          'groups' => 'Users',
+          'tplLogin' => 'tplOfficeloginRegister',
+          'tplLogout' => 'tplOfficeAuthLogout',
+          'tplActivate' => 'tplOfficeAuthActivate',
+          'tplRegister' => 'tplOfficeAuthRegister'
+          ]
+          )}
+        </div>
+      </section>
+    {/if}
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-content">
+      <div class="container">
+        <div class="page404-block">
+          <div class="page404">
+            <div class="img">
+              <i class="icon-earth-globe1"></i>
+            </div>
+            <div class="text">
+              <div class="caption">
+                {$_modx->lexicon('404_title')}
+              </div>
+              <p>
+                {$_modx->lexicon('404_desc')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

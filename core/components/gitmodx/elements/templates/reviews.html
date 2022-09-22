@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-reviews">
+      <div class="container">
+        {$_modx->runSnippet(
+          '!TicketComments',
+          [
+            'allowGuest' => '1',
+            'tplComments' => 'tplTicketsCommentWrapperSite',
+            'tplCommentFormGuest' => 'tplTicketsCommentFormSite',
+            'tplCommentForm' => 'tplTicketsCommentFormLogin',
+            'tplCommentAuth' => 'tplTicketsCommentOneAuthSite',
+            'formBefore' => 0,
+            'autoPublish' => 0,
+            'autoPublishGuest' => 0,
+            'enableCaptcha' => 0
+          ]
+        )}
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

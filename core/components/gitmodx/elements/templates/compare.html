@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {include 'head'}
+</head>
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-content section-compare">
+      <div class="container">
+        <div class="content">
+          {set $paramoption = $_modx->runSnippet('!msOptionsReturn')}
+          {$_modx->runSnippet(
+          '!CompareList',
+          [
+            '_formatSnippet' => 'formatComparison',
+            'fields' => "{$paramoption}",
+            'tplRow' => 'tplComparisonRow',
+            'tplParam' => 'tplComparisonParam',
+            'tplCell' => 'tplComparisonCell',
+            'tplHead' => 'tplComparisonHead',
+            'tplCorner' => 'tplComparisonCorner',
+            'tplOuter' => 'tplComparisonOuter'
+          ]
+          )}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

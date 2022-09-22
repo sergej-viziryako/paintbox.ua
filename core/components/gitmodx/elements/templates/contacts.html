@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
+    <section class="section- section-content section-contacts">
+      <div class="container">
+        <div class="column column100">
+          <div class="column column50">
+
+            <div class="content content-contacts popup">
+              {include 'contacts_full_block'}
+              {include 'messengers_block'}
+              {include 'working_time_block'}
+            </div>
+            <div class="content content-contacts">
+            </div>
+          </div>
+          <div class="column column50 bg-cbg">
+            <div class="form-calculation-block">
+              <div class="form form-calculation">
+                {$_modx->runSnippet(
+                '!AjaxForm',
+                  [
+                    'snippet' => 'FormIt',
+                    'form' => 'tplAjaxFormContact',
+                    'formName' => 'Форма обратной связи с контактов',
+                    'formFields' => 'name,phone,email,text',
+                    'fieldNames' => 'name==Имя,phone==Телефон,email==E-mail,text==Текст сообщения',
+                    'hooks' => 'validate,FormItSaveForm,email,telegrambot',
+                    'emailSubject' => "Форма обратной связи с сайта {$_modx->config.form_site_name}, страница Контакты",
+                    'emailTo' => "{$_modx->config.email_sender}",
+                    'emailTpl' => 'tplOrderFormContact',
+                    'emailFrom' => '{$_modx->config.from_email_sender}',
+                    'validate' => 'name:required,phone:required',
+                    'validationErrorMessage' => "{$_modx->lexicon('callback_form_error')}",
+                    'successMessage' => "{$_modx->lexicon('callback_form_success')}"
+                  ]
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>
