@@ -15,45 +15,43 @@
                         индивидуальному заказу. Найдите свой цвет прямо сейчас!
                     </p>
                 </div>
-                <form action="" class="form form-color" id="carform">
+                <form action="" class="form form-color" id="carform" method="get" onsubmit="refresh(); return false;">
                     <fieldset>
                         <div class="row center">
                             <div class="block column column25">
-                                <label for="cars-year">Год:</label>
-                                <select name="cars-year" id="cars-year" form="carform carform-year">
-                                    <option value="" selected="true" disabled="disabled">Выберите год</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2019">2019</option>
-                                </select>
-                            </div>
-                            <div class="block column column25">
-                                <label for="cars-brand">Бренд:</label>
-                                <select name="cars-brand" id="cars-brand" form="carform carform-brand">
-                                    <option value="" selected="true" disabled="disabled">Выберите бренд</option>
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
+                                <label for="cars-brand">Марка:</label>
+                                <select name="mfa" id="select-mfa" form="carform carform-brand">
+                                    <option selected>Выберите марку</option>
+                                    {$_modx->runSnippet(
+                                    'pdoResources',
+                                    [
+                                        'elementClass' => 'modSnippet',
+                                        'parents' => 29312,
+                                        'tpl' => '@INLINE <option value="{$pagetitle}" data-id="{$id}">{$pagetitle}</option>',
+                                        'where' => '{"template:IN":[44]}',
+                                        'depth' => 0,
+                                        'limit' => 0,
+                                        'sortby' => 'pagetitle',
+                                        'sortdir' => '',
+                                        'tvPrefix' => '',
+                                    ]
+                                    )}
                                 </select>
                             </div>
                             <div class="block column column25">
                                 <label for="cars-model">Модель:</label>
-                                <select name="cars-model" id="cars-model" form="carform carform-model">
-                                    <option value="" selected="true" disabled="disabled">Выберите модель</option>
-                                    <option value="A1">A1</option>
-                                    <option value="A2">A2</option>
-                                    <option value="A3">A3</option>
-                                    <option value="A4">A4</option>
+                                <select name="mod" id="select-mod" form="carform carform-model" disabled>
+                                    <option selected>Выберите модель</option>
                                 </select>
                             </div>
                             <div class="block column column25">
-                                <button class="submit">
-						  <span>
-							Подобрать
-						  </span>
-                                </button>
+                                <label for="cars-year">Год:</label>
+                                <select name="type" id="select-type" form="carform carform-year" disabled>
+                                    <option selected>Выберите год</option>
+                                </select>
+                            </div>
+                            <div class="block column column25">
+                                <button id="filter-refresh-button" class="submit"><span>Подобрать</span></button>
                             </div>
                         </div>
                     </fieldset>

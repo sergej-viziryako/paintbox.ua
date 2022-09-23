@@ -3,6 +3,7 @@
 <script>window.jQuery || document.write('<script src="/tpl/js/jquery-3.2.1.min.js"><\/script>')</script>
 <script src="{$_modx->runSnippet('fileversion',['input' => '/tpl/js/jquery.main.js'])}"></script>
 <script src="/tpl/js/jquery.engine.js"></script>
+<script src="/tpl/js/form_search.js"></script>
 <script src="/tpl/js/favoriter.js"></script>
 <script src="/tpl/js/lang.js"></script>
 <script src="/tpl/js/lib/accordion.js"></script>
