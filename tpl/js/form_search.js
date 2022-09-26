@@ -14,7 +14,7 @@ $(function(){
             console.log(data);
         })*/
 
-        document.getElementById("select-type").innerHTML = "<option selected>Выберите модификацию</option>";
+        document.getElementById("select-type").innerHTML = "<option selected>Выберите год</option>";
         document.getElementById('select-type').setAttribute("disabled","disabled");
 
         $.ajax({
