@@ -22,7 +22,7 @@
 <body style="margin:0;padding:0;background:#f6f6f6;">
 <div style="height:100%;padding-top:20px;background:#ffff;">
     {block 'logo'}
-      {set $logo_pic = "{$site_url}/files/{$_modx->config.sitePicture}"}
+      {set $logo_pic = "{$site_url}/tpl/images/paint_box_logo_mail.jpg"}
       <a href="{$site_url}">
         <img style="{$style.logo}"
              src="{$logo_pic | replace:'/ua/':'/'}"
@@ -58,26 +58,45 @@
                       </thead>
                         {foreach $products as $product}
                           {var $product_name = $_modx->runSnippet('!getPagetitleLocalizator', ['id' => "{$product.id}",'content' =>'pagetitle' ])}
+                          {var $rgb = $_modx->runSnippet('msProductOptions',['product' => "{$product.id}", 'onlyOptions' => 'rgb', 'tpl' => 'tplProductOptionsColor'])}
+
                           <tr>
                             <td style="{$style.th}">
-                                {if $product.thumb?}
-                                  {var $product_pic = "{$site_url}{$product.thumb}"}
-                                  <img src="{$product_pic | replace:'/ua/':'/'}"
-                                       alt="{$product_name}"
-                                       title="{$product_name}"
-                                       width="120" height="90"/>
+                                {if $product.options['size'] != ''}
+                                    {if $rgb?}
+                                        <div class="img" style="width:50px;height:50px;margin: 0 auto;background: rgb({$rgb})!important;"></div>
+                                    {else}
+                                        <img src="{$logo_pic | replace:'/ua/':'/'}"
+                                             alt="{$product_name}"
+                                             title="{$product_name}"
+                                             width="120"/>
+                                    {/if}
                                 {else}
-                                  <img src="{$logo_pic | replace:'/ua/':'/'}"
-                                       alt="{$product_name}"
-                                       title="{$product_name}"
-                                       width="120"/>
+                                    {if $product.thumb?}
+                                      {var $product_pic = "{$site_url}{$product.thumb}"}
+                                      <img src="{$product_pic | replace:'/ua/':'/'}"
+                                           alt="{$product_name}"
+                                           title="{$product_name}"
+                                           width="120" height="90"/>
+                                    {else}
+                                      <img src="{$logo_pic | replace:'/ua/':'/'}"
+                                           alt="{$product_name}"
+                                           title="{$product_name}"
+                                           width="120"/>
+                                    {/if}
                                 {/if}
                             </td>
                             <td style="{$style.th}">
                                 {if $product.id?}
-                                  <a href="{$product.id | url : ['scheme' => 'full']}" style="{$style.a}">
-                                      {$product_name}
-                                  </a>
+                                    {if $product.options['size'] != ''}
+                                      <a href="{$product.parent | url : ['scheme' => 'full']}" style="{$style.a}">
+                                          {$product_name}
+                                      </a>
+                                    {else}
+                                        <a href="{$product.id | url : ['scheme' => 'full']}" style="{$style.a}">
+                                            {$product_name}
+                                        </a>
+                                    {/if}
                                 {else}
                                     {$product_name}
                                 {/if}

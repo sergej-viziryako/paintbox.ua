@@ -8,8 +8,13 @@ $culture_key = $modx->getOption('cultureKey');
 if ($id == '') { return ''; } // Вывод если key пустой
 if ($content == '') { return ''; } // Вывод если key пустой
 
-$res = $modx->getObject('modResource', array('id' => $id));
-$localContent = $modx->getObject('localizatorContent', array('resource_id' => $id, 'key' => $culture_key));
+if (!$res = $modx->getObject('modResource', array('id' => $id))) {
+    return;
+}
+
+if (!$localContent = $modx->getObject('localizatorContent', array('resource_id' => $id, 'key' => $culture_key))) {
+    return;
+}
 
 if ($culture_key != 'ru') {
   if (!empty($localContent)) {

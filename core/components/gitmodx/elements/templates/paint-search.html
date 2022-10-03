@@ -1,157 +1,165 @@
 <!DOCTYPE html>
 <html>
 {include 'head'}
-<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<body
+    class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks"
+    id="totop">
 <div id="wrapper">
-    {include 'topslider'}
-    {include 'header'}
-    <main role="main" id="main">
-        {include 'breadcrumbs'}
-        <section class="section section-form-color">
-            <div class="container">
-                {*<div class="content">
-                    <p>
-                        Мы гарантируем качество наших автокрасок и продуктов для кузовного ремонта, изготовленных по
-                        индивидуальному заказу. Найдите свой цвет прямо сейчас!
-                    </p>
-                </div>*}
-                <form action="" class="form form-color" id="carform" method="get" onsubmit="refresh(); return false;">
-                    <fieldset>
-                        <div class="row center">
-                            <div class="block column column100">
-                                <div class="block column column33">
-                                    {*<label for="cars-brand">Марка:</label>*}
-                                    <select name="mfa" id="select-mfa" form="carform carform-brand">
-                                        <option selected>Выберите марку</option>
-                                        {$_modx->runSnippet(
-                                        'pdoResources',
-                                        [
-                                            'elementClass' => 'modSnippet',
-                                            'parents' => 29312,
-                                            'tpl' => '@INLINE <option value="{$pagetitle}" data-id="{$id}">{$pagetitle}</option>',
-                                            'where' => '{"template:IN":[44]}',
-                                            'depth' => 0,
-                                            'limit' => 0,
-                                            'sortby' => 'pagetitle',
-                                            'sortdir' => '',
-                                            'tvPrefix' => '',
-                                        ]
-                                        )}
-                                    </select>
-                                </div>
-                                <div class="block column column33">
-                                    {*<label for="cars-model">Модель:</label>*}
-                                    <select name="mod" id="select-mod" form="carform carform-model" disabled>
-                                        <option selected>Выберите модель</option>
-                                    </select>
-                                </div>
-                                <div class="block column column33">
-                                    {*<label for="cars-year">Год:</label>*}
-                                    <select name="type" id="select-type" form="carform carform-year" disabled>
-                                        <option selected>Выберите год</option>
-                                    </select>
-                                </div>
-                            </div>
+  {include 'topslider'}
+  {include 'header'}
+  <main role="main" id="main">
+    {include 'breadcrumbs'}
 
-                            <div class="block column column100">
-                                <button id="filter-refresh-button" class="submit"><span>Подобрать краску</span></button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </section>
+    {set $product_items_color_form = $_modx->runSnippet(
+      'msProducts',
+      [
+        'tpl'=>'tplProductColor',
+        'includeThumbs' => 'small,small_mobile',
+        'parents' => "{$_modx->resource.id}",
+        'depth' => 0,
+        'showLog' => 0,
+        'limit' => 0,
+        'where' => '{"Data.availability":"1"}'
+      ]
+    )}
 
-        {if $_modx->resource.id == 29312}
-            {include 'main_catalog_autobrands'}
-        {else}
-            {set $items = $_modx->runSnippet(
-                'pdoResources',
-                [
-                    'elementClass' => 'modSnippet',
-                    'parents' => "{$_modx->resource.id}",
-                    'tpl' => 'tplManufacturer',
-                    'depth' => 0,
-                    'limit' => 0,
-                    'sortby' => 'publishedon',
-                    'sortdir' => 'ASC',
-                    'tvPrefix' => '',
-                    'includeContent' => 1,
-                    'where' => '{"class_key:IN":["msCategory"]}',
-                ]
-            )}
-
-            {if $items?}
-                <section class="section- section-">
-                    <div class="container">
-                        <div class="colors-brand-block">
-                            <ul class="colors-brand">
-                                {$items}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            {/if}
-        {/if}
-
-        {set $product_items_color = $_modx->runSnippet(
-        'msProducts',
-        [
-            'tpl'=>'tplProductColor',
-            'includeThumbs' => 'small,small_mobile',
-            'parents' => "{$_modx->resource.id}",
-            'includeTVs' => 'video',
-            'depth' => 0,
-            'showLog' => 0,
-            'limit' => 0,
-            'where' => '{"Data.availability":"1"}'
-        ]
-        )}
-
-        {if $product_items_color}
-            <section class="section- section-">
-                <div class="container">
-                    <div class="colors-block">
-                      <ul class="colors">
-                          <li>
-                              <div class="inner caption-table-color">
-                                  <div class="description-main-product">
-                                      <div class="description-caption-color column25">Цвет</div>
-                                      <div class="description-caption-color column40">Название</div>
-                                      <div class="description-caption-color column25">Номер чипа</div>
-                                      <div class="description-caption-color column10">Код</div>
-                                  </div>
-                                  <div class="description-order-product">
-                                      <div class="description-caption-color column25">Объем</div>
-                                      <div class="description-caption-color column25">Цена</div>
-                                      <div class="description-caption-color column25">Кол-во</div>
-                                      <div class="column25"></div>
-                                  </div>
-                              </div>
-
-                          </li>
-                        {$product_items_color}
-                      </ul>
-                    </div>
+    {if !$product_items_color_form}
+      <section class="section section-form-color">
+        <div class="container">
+          <form action="" class="form form-color" id="carform" method="get" onsubmit="refresh(); return false;">
+            <fieldset>
+              <div class="row center">
+                <div class="block column column100">
+                  <div class="block column column33">
+                    <select name="mfa" id="select-mfa" form="carform carform-brand">
+                      <option selected>{$_modx->lexicon('paint_choose_brand')}</option>
+                      {$_modx->runSnippet(
+                      'pdoResources',
+                      [
+                        'elementClass' => 'modSnippet',
+                        'parents' => 29312,
+                        'tpl' => '@INLINE <option value="{$pagetitle}" data-id="{$id}">{$pagetitle}</option>',
+                        'where' => '{"template:IN":[44]}',
+                        'depth' => 0,
+                        'limit' => 0,
+                        'sortby' => 'pagetitle',
+                        'sortdir' => '',
+                        'tvPrefix' => '',
+                      ]
+                      )}
+                    </select>
+                  </div>
+                  <div class="block column column33">
+                    <select name="mod" id="select-mod" aria-label="car model" form="carform carform-model" disabled>
+                      <option selected>{$_modx->lexicon('paint_choose_model')}</option>
+                    </select>
+                  </div>
+                  <div class="block column column33">
+                    <select name="type" id="select-type" form="carform carform-year" disabled>
+                      <option selected>{$_modx->lexicon('paint_choose_year')}</option>
+                    </select>
+                  </div>
                 </div>
-            </section>
-        {/if}
 
-        <section class="section- section-content">
-            <div class="container">
-                <div class="content">
-                    {if $_modx->config.cultureKey != 'ru'}
-                        {$_modx->resource.localizator_content}
-                    {else}
-                        {$_modx->resource.content}
-                    {/if}
+                <div class="block column column100">
+                  <button id="filter-refresh-button" class="submit"><span>{$_modx->lexicon('paint_form_find_button')}</span></button>
                 </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    {/if}
+
+    {if $_modx->resource.id == 29312}
+      {include 'main_catalog_autobrands'}
+    {else}
+      {set $items = $_modx->runSnippet(
+      'pdoResources',
+      [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.id}",
+        'tpl' => 'tplManufacturer',
+        'depth' => 0,
+        'limit' => 0,
+        'sortby' => 'publishedon',
+        'sortdir' => 'ASC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'where' => '{"class_key:IN":["msCategory"]}',
+      ]
+      )}
+
+      {if $items?}
+        <section class="section- section-">
+          <div class="container">
+            <div class="colors-brand-block">
+              <ul class="colors-brand">
+                {$items}
+              </ul>
             </div>
+          </div>
         </section>
-        <section class="section- section-prefooter">
-        </section>
-    </main>
-    {include 'footer'}
+      {/if}
+    {/if}
+
+    {set $product_items_color = $_modx->runSnippet(
+    'msProducts',
+    [
+    'tpl'=>'tplProductColor',
+    'includeThumbs' => 'small,small_mobile',
+    'parents' => "{$_modx->resource.id}",
+    'depth' => 0,
+    'showLog' => 0,
+    'limit' => 0,
+    'where' => '{"Data.availability":"1"}'
+    ]
+    )}
+
+    {if $product_items_color}
+      <section class="section- section-">
+      <div class="container">
+        <div class="colors-block">
+          <ul class="colors">
+            <li>
+              <div class="inner caption-table-color">
+                <div class="description-main-product">
+                  <div class="description-caption-color column25">{$_modx->lexicon('paint_table_color')}</div>
+                  <div class="description-caption-color column40">{$_modx->lexicon('paint_table_name')}</div>
+                  <div class="description-caption-color column25">{$_modx->lexicon('paint_table_chip')}</div>
+                  <div class="description-caption-color column10">{$_modx->lexicon('paint_table_code')}</div>
+                </div>
+                <div class="description-order-product">
+                  <div class="description-caption-color column25">{$_modx->lexicon('paint_table_volume')}</div>
+                  <div class="description-caption-color column25">{$_modx->lexicon('paint_table_price')}</div>
+                  <div class="description-caption-color column25">{$_modx->lexicon('paint_table_count')}</div>
+                  <div class="column25"></div>
+                </div>
+              </div>
+
+            </li>
+            {$product_items_color}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {/if}
+
+    <section class="section- section-content">
+      <div class="container">
+        <div class="content">
+          {if $_modx->config.cultureKey != 'ru'}
+            {$_modx->resource.localizator_content}
+          {else}
+            {$_modx->resource.content}
+          {/if}
+        </div>
+      </div>
+    </section>
+    <section class="section- section-prefooter">
+    </section>
+  </main>
+  {include 'footer'}
 </div>
 {include 'popup'}
 {include 'script'}

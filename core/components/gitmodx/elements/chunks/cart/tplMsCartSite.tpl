@@ -1,25 +1,49 @@
+
 <ul class="msCart inbasket" id="msCart">
   {foreach $products as $product}
     {set $item_pagetitle = $_modx->runSnippet('!getContentLanguage', ['id' => "{$product.id}",'content' =>'pagetitle' ])}
+    {set $rgb = $_modx->runSnippet('msProductOptions',['product' => "{$product.id}", 'onlyOptions' => 'rgb', 'tpl' => 'tplProductOptionsColor'])}
+
     <li id="{$product.key}">
-      <a href="{$product.id | url}" class="img">
-        {if $product.thumb?}
-          <img src="{$product.thumb}" alt="{$item_pagetitle}" title="{$item_pagetitle}"/>
-        {else}
-          <span class="img img-empty">
-            <i class="icon-picture"></i>
-          </span>
-        {/if}
-      </a>
-      <div class="text">
-        <a href="{$product.id | url}" class="caption">
-          {$item_pagetitle}
+      {if $product.options['size'] != ''}
+        <a href="{$product.parent | url}" class="img">
+          {if $rgb?}
+            <div class="img" style="background: rgb({$rgb})!important;"></div>
+          {else}
+            <span class="img img-empty">
+              <i class="icon-picture"></i>
+            </span>
+          {/if}
         </a>
+      {else}
+        <a href="{$product.id | url}" class="img">
+          {if $product.thumb?}
+            <img src="{$product.thumb}" alt="{$item_pagetitle}" title="{$item_pagetitle}"/>
+          {else}
+            <span class="img img-empty">
+                <i class="icon-picture"></i>
+              </span>
+          {/if}
+        </a>
+      {/if}
+
+
+      <div class="text">
+        {if $product.options['size'] != ''}
+          <a href="{$product.parent | url}" class="caption">
+            {$product.pagetitle}
+          </a>
+        {else}
+          <a href="{$product.id | url}" class="caption">
+            {$item_pagetitle}
+          </a>
+        {/if}
         <div class="description-block">
           <div class="description">
-            {if $product.article?}
+            {*if $product.article?}
               <p>{$_modx->lexicon('article')}: {$product.article}</p>
-            {/if}
+            {/if*}
+
             {if $product.options?}
               <p>{$_modx->lexicon('options')}: {$product.options | join : '; '}</p>
             {/if}

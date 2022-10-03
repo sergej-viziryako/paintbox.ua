@@ -14,19 +14,19 @@
                     {$_modx->runSnippet('msProductOptions',['product' => "{$id}", 'onlyOptions' => 'chip', 'tpl' => 'tplProductOptionsColor'])}
                 </div>
                 <div class="description-title column10">
-                    {$article}
+                    {$_modx->runSnippet('msProductOptions',['product' => "{$id}", 'onlyOptions' => 'code', 'tpl' => 'tplProductOptionsColor'])}
                 </div>
             </div>
             <div class="description-order-product">
                 <div class="description-title column25">
                     <select name="options[size]" id="option_size">
-                        <option value="">1л</option>
-                        <option value="">2л</option>
-                        <option value="">3л</option>
+                        <option value="1л">1л</option>
+                        <option value="2л">2л</option>
+                        <option value="3л">3л</option>
                     </select>
                 </div>
                 <div class="description-title column25">
-                    <span>{$price} </span> грн
+                    <span>{$price}</span> грн
                 </div>
                 <div class="description-title column25">
                     <div class="number quantity">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <button class="buy column25" type="submit" name="ms2_action" value="cart/add">
-                    <span>Купить</span>
+                    <span>{$_modx->lexicon('buy_button')}</span>
                 </button>
             </div>
         </div>

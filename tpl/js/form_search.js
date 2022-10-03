@@ -1,8 +1,5 @@
 $(function(){
-    // msFavoriter
-    // https://github.com/TrywaR/msFavoriter
-    // msFavoriter
-    // https://github.com/TrywaR/msFavoriter
+    //https://github.com/TrywaR/msFavoriter
     //https://code.tutsplus.com/ru/tutorials/how-to-use-ajax-in-php-and-jquery--cms-32494
     // - Добавление или удаление избранных товаров
     $("select#select-mfa").change(function() {
@@ -26,12 +23,12 @@ $(function(){
             success: function(data){
                 //if request if made successfully then the response represent the data
                 //var jsonData = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 document.getElementById("select-mod").innerHTML = "<option value=\"\">Выберите модель</option>";
                 var select_mod = document.getElementById('select-mod');
                 var i=0;
                 JSON.parse(data, function(k, v) {
-                    console.log(k+' '+v);
+                    //console.log(k+' '+v);
                     var opt_select_mod = document.createElement('option');
                     opt_select_mod.value = k;
                     opt_select_mod.innerHTML = v;
@@ -47,38 +44,26 @@ $(function(){
                     document.getElementById("select-mod").innerHTML = "<option selected>Нет данных</option>";
                 }
             },
-
-            /*statusCode: {
-                404: function(data) {
-
-                    alert(data.responseText);
-                }
-            }*/
-
-            /*error: function(data) {
-                console.log('failed');
-            }*/
         });
     });
     $("select#select-mod").change(function() {
         //var mod_id = $(this).find(":selected").attr('data-id');
         var mod_id = $(this).find(":selected").val();
-        console.log(mod_id);
+        //console.log(mod_id);
         document.getElementById("select-type").innerHTML = "";
 
         $.ajax({
             type: "post",
             url: "/assets/components/search_auto/connector.php",
             data: {mod_id: mod_id},
-            success: function(data){
-
-                console.log(data.length);
+            success: function(data) {
+                //console.log(data.length);
                 document.getElementById("select-type").innerHTML = "";
                 var select_type = document.getElementById('select-type');
                 var i=0;
 
                 JSON.parse(data, function(k, v) {
-                    console.log(k+' '+v);
+                    //console.log(k+' '+v);
                     var opt_select_type = document.createElement('option');
                     opt_select_type.value = k;
                     opt_select_type.innerHTML = v;
@@ -93,15 +78,14 @@ $(function(){
                 } else {
                     document.getElementById('select-type').setAttribute("disabled","disabled");
                 }
-
-                console.log(i);
-
+                //console.log(i);
             }
         });
 
     });
 
-    $("button#filter-refresh-button").click(function() {
+    $("button#filter-refresh-button").click(function(e) {
+        e.preventDefault();
         var mfa_id = $("select#select-mfa").find(":selected").attr('data-id');
         var mod_id = $("select#select-mod").find(":selected").val();
         var type_id = $("select#select-type").find(":selected").val();
@@ -121,6 +105,7 @@ $(function(){
         });
     });
 
+    /*
     $("select#select-sup").change(function() {
         //var mod_id = $(this).find(":selected").attr('data-id');
         var sup_id = $(this).find(":selected").val();
@@ -180,5 +165,5 @@ $(function(){
             }
         });
     });
-
+    */
 });

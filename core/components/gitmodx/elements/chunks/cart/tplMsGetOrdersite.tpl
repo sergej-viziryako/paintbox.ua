@@ -85,9 +85,15 @@
                 {foreach $products as $product}
                   {set $item_pagetitle = $_modx->runSnippet('!getContentLanguage', ['id' => "{$product.id}",'content' =>'pagetitle' ])}
                   <li>
-                    <a href="{$product.id | url}" class="caption">
-                      {$item_pagetitle}
-                    </a>
+                    {if $product.options['size'] != ''}
+                      <a href="{$product.parent | url}" class="caption">
+                        {$product.pagetitle}
+                      </a>
+                    {else}
+                      <a href="{$product.id | url}" class="caption">
+                        {$item_pagetitle}
+                      </a>
+                    {/if}
                     {if $product.options?}
                       <p>{$_modx->lexicon('options')}: {$product.options | join : '; '}</p>
                     {/if}
