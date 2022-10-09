@@ -1,12 +1,3 @@
-{*<div class="rating cell" style="width: 330px;">
-  <div class="stars">
-    <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
-  </div>
-  <div>
-    {$_modx->lexicon('rating')}: <span>[[+rating_value]] / 5 - {$_modx->lexicon('rating_voices')}: [[+rating_count]]</span>
-  </div>
-</div>*}
-
 <div class="rating cell" >
   <div class="rating[[+rating_active]] stars" >
     <div class="rating__best">

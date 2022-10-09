@@ -5,12 +5,12 @@
       <div class="benefits-block">
         <ul class="benefits">
           {foreach $rows as $row}
-            {if $_modx->config.cultureKey != 'ru'}
-              {set $link = $row.linkUA}
-              {set $title = $row.textUA}
+            {if $_modx->config.cultureKey != 'ua'}
+                {set $link = $row.link}
+                {set $title = $row.text}
             {else}
-              {set $link = $row.link}
-              {set $title = $row.text}
+                {set $link = $row.linkUA}
+                {set $title = $row.textUA}
             {/if}
             <li>
               <a href="{$link}" class="inner">

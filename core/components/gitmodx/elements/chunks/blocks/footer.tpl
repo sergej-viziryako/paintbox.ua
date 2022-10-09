@@ -13,7 +13,7 @@
         <div class="footer-caption">
           <span>{$_modx->lexicon('footer_shop_title')}</span>
         </div>
-        {if $_modx->config.cultureKey != 'ru'}
+        {if $_modx->config.cultureKey != 'ua'}
           {$_modx->runSnippet(
           'pdoMenu',
           [
@@ -27,6 +27,8 @@
             'cacheTime' => 3600,
             'includeTVs' => 'button_menu_color',
             'hereClass' => 'active',
+            'showUnpublished' => 0,
+            'showHidden' => 0,
             'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = modResource.id"}}',
             'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
             'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
@@ -45,7 +47,9 @@
             'cache' => 1,
             'cacheTime' => 3600,
             'includeTVs' => 'button_menu_color',
-            'hereClass' => 'active'
+            'hereClass' => 'active',
+            'showUnpublished' => 0,
+            'showHidden' => 0
             ]
           )}
         {/if}
@@ -54,7 +58,7 @@
         <div class="footer-caption">
           <span>{$_modx->lexicon('footer_info_title')}</span>
         </div>
-        {if $_modx->config.cultureKey != 'ru'}
+        {if $_modx->config.cultureKey != 'ua'}
           {$_modx->runSnippet(
           'pdoMenu',
           [
@@ -68,6 +72,8 @@
             'cacheTime' => 3600,
             'hereClass' => 'active',
             'includeTVs' => 'button_menu_color',
+            'showUnpublished' => 0,
+            'showHidden' => 0
             'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = modResource.id"}}',
             'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
             'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
@@ -86,7 +92,9 @@
             'cache' => 1,
             'cacheTime' => 3600,
             'includeTVs' => 'button_menu_color',
-            'hereClass' => 'active'
+            'hereClass' => 'active',
+            'showUnpublished' => 0,
+            'showHidden' => 0
             ]
           )}
         {/if}
@@ -97,7 +105,7 @@
         <div class="footer-caption">
           <span>{$_modx->lexicon('footer_popular_cats_title')}</span>
         </div>
-        {if $_modx->config.cultureKey != 'ru'}
+        {if $_modx->config.cultureKey != 'ua'}
           {$_modx->runSnippet(
           'pdoMenu',
             [

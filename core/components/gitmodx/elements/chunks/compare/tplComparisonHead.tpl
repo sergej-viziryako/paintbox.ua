@@ -6,9 +6,9 @@
         <a href="{$_modx->makeUrl($id)}" class="img">
             {include 'status_block'}
             {if $thumb?}
-            <img class="lazy" src="{$thumb}" alt="{$pagetitle}" title="{$pagetitle}"/>
+                <img class="lazy" src="{$thumb}" alt="{$pagetitle}" title="{$pagetitle}"/>
             {else}
-            <span class="img img-empty">
+                <span class="img img-empty">
                     <i class="icon-picture"></i>
                 </span>
             {/if}

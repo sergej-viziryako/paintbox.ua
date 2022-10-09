@@ -16,7 +16,7 @@
             </div>
             <div class="mainslider slider-mainslider">
               {foreach $rows as $row}
-                {if $_modx->config.cultureKey != 'ru'}
+                {if $_modx->config.cultureKey != 'ua'}
                   {set $url = $row.linkUA}
                   {set $image = $row.imageUA}
                   {set $image_mob = $row.image_mobUA}
@@ -47,124 +47,131 @@
     {include 'our_brands'}
     {include 'main_catalog'}
     {*include 'main_catalog_plitka'*}
-    <section class="section- section-blogs-news bg-cbg">
-      <div class="container">
-        <div class="column column50">
-          {if $_modx->config.cultureKey != 'ru'}
-            {set $articles = $_modx->runSnippet(
-            'pdoResources',
-            [
-              'elementClass' => 'modSnippet',
-              'parents' => 162,
-              'tpl' => 'tplBlog',
-              'depth' => 0,
-              'limit' => 4,
-              'sortby' => 'publishedon',
-              'sortdir' => 'DESC',
-              'tvPrefix' => '',
-              'includeContent' => 1,
-              'includeTVs' => 'img',
-              'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
-              "localizator.resource_id = modResource.id"}}',
-              'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
-              'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
-            ]
-          )}
-          {else}
-            {set $articles = $_modx->runSnippet(
-            'pdoResources',
-              [
-              'elementClass' => 'modSnippet',
-              'parents' => 162,
-              'tpl' => 'tplBlog',
-              'depth' => 0,
-              'limit' => 4,
-              'sortby' => 'publishedon',
-              'sortdir' => 'DESC',
-              'tvPrefix' => '',
-              'includeContent' => 1,
-              'includeTVs' => 'img'
-              ]
-            )}
-          {/if}
-          {if $articles?}
-            <div class="section-caption">
-              <div class="caption">
-                <span>{$_modx->lexicon('article_title')}</span>
-              </div>
-              <div class="seeall-block">
-                <a href="{$_modx->makeUrl(162)}" class="seeall">
-                  <span>{$_modx->lexicon('all_articles')}</span>
-                </a>
-              </div>
-            </div>
-            <div class="blogs-block">
-              <ul class="blogs">
-                {$articles}
-              </ul>
-            </div>
-          {/if}
-        </div>
-        <div class="column column50">
-          {if $_modx->config.cultureKey != 'ru'}
-            {set $news = $_modx->runSnippet(
-            'pdoResources',
-              [
-              'elementClass' => 'modSnippet',
-              'parents' => 163,
-              'tpl' => 'tplNews',
-              'depth' => 0,
-              'limit' => 6,
-              'sortby' => 'publishedon',
-              'sortdir' => 'DESC',
-              'tvPrefix' => '',
-              'includeContent' => 1,
-              'includeTVs' => 'img',
-              'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
-              "localizator.resource_id = modResource.id"}}',
-              'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
-              'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
-              ]
-            )}
-          {else}
-            {set $news = $_modx->runSnippet(
-            'pdoResources',
-            [
-              'elementClass' => 'modSnippet',
-              'parents' => 163,
-              'tpl' => 'tplNews',
-              'depth' => 0,
-              'limit' => 6,
-              'sortby' => 'publishedon',
-              'sortdir' => 'DESC',
-              'tvPrefix' => '',
-              'includeContent' => 1,
-              'includeTVs' => 'img'
-            ]
-            )}
-          {/if}
-          {if $news?}
-            <div class="section-caption">
-              <div class="caption">
-                <span>{$_modx->lexicon('news_title')}</span>
-              </div>
-              <div class="seeall-block">
-                <a href="{$_modx->makeUrl(163)}" class="seeall">
-                  <span>{$_modx->lexicon('all_news')}</span>
-                </a>
-              </div>
 
-            </div>
-            <div class="news-block">
-              <ul class="news">
-                {$news}
-              </ul>
-            </div>
-          {/if}
+
+    {if $_modx->config.cultureKey != 'ua'}
+      {set $articles = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => 162,
+        'tpl' => 'tplBlog',
+        'depth' => 0,
+        'limit' => 4,
+        'sortby' => 'publishedon',
+        'sortdir' => 'DESC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img',
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+        "localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+        ]
+      )}
+    {else}
+      {set $articles = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => 162,
+        'tpl' => 'tplBlog',
+        'depth' => 0,
+        'limit' => 4,
+        'sortby' => 'publishedon',
+        'sortdir' => 'DESC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img'
+        ]
+      )}
+    {/if}
+
+    {if $_modx->config.cultureKey != 'ua'}
+      {set $news = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => 163,
+        'tpl' => 'tplNews',
+        'depth' => 0,
+        'limit' => 6,
+        'sortby' => 'publishedon',
+        'sortdir' => 'DESC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img',
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+        "localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+        ]
+      )}
+    {else}
+      {set $news = $_modx->runSnippet(
+      'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => 163,
+        'tpl' => 'tplNews',
+        'depth' => 0,
+        'limit' => 6,
+        'sortby' => 'publishedon',
+        'sortdir' => 'DESC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img'
+        ]
+      )}
+    {/if}
+
+    {if $articles? || $news?}
+      <section class="section- section-blogs-news bg-cbg">
+        <div class="container">
+          <div class="column column50">
+            {if $articles?}
+              <div class="section-caption">
+                <div class="caption">
+                  <span>{$_modx->lexicon('article_title')}</span>
+                </div>
+                <div class="seeall-block">
+                  <a href="{$_modx->makeUrl(162)}" class="seeall">
+                    <span>{$_modx->lexicon('all_articles')}</span>
+                  </a>
+                </div>
+              </div>
+              <div class="blogs-block">
+                <ul class="blogs">
+                  {$articles}
+                </ul>
+              </div>
+            {/if}
+          </div>
+          <div class="column column50">
+            {if $news?}
+              <div class="section-caption">
+                <div class="caption">
+                  <span>{$_modx->lexicon('news_title')}</span>
+                </div>
+                <div class="seeall-block">
+                  <a href="{$_modx->makeUrl(163)}" class="seeall">
+                    <span>{$_modx->lexicon('all_news')}</span>
+                  </a>
+                </div>
+
+              </div>
+              <div class="news-block">
+                <ul class="news">
+                  {$news}
+                </ul>
+              </div>
+            {/if}
+          </div>
         </div>
-      </div>
-    </section>
-    {if $_modx->config.cultureKey != 'ru'}
+      </section>
+    {/if}
+
+    {if $_modx->config.cultureKey != 'ua'}
       {set $services = $_modx->runSnippet(
       'pdoResources',
       [
@@ -229,7 +236,7 @@
       {set $items_on_category_page = 5}
     {/if}
 
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
       {set $sale_items = $_modx->runSnippet(
       'msProducts',
         [
@@ -284,7 +291,7 @@
       <hr>
     {/if}
 
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
       {set $new_items = $_modx->runSnippet(
       'msProducts',
         [
@@ -342,7 +349,7 @@
       <div class="container">
         <h1>{$_modx->runSnippet('metaTagsh1')}</h1>
         <div class="content">
-          {if $_modx->config.cultureKey != 'ru'}
+          {if $_modx->config.cultureKey != 'ua'}
             {$_modx->resource.localizator_content}
           {else}
             {$_modx->resource.content}

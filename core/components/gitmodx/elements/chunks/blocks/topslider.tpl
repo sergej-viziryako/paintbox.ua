@@ -6,12 +6,12 @@
       <div class="topslider-block">
         <div class="topslider slider-topslider">
           {foreach $rows as $row}
-            {if $_modx->config.cultureKey != 'ru'}
-              {set $link = $row.linkUA}
-              {set $text = $row.textUA}
+            {if $_modx->config.cultureKey != 'ua'}
+                {set $link = $row.link}
+                {set $text = $row.text}
             {else}
-              {set $link = $row.link}
-              {set $text = $row.text}
+                {set $link = $row.linkUA}
+                {set $text = $row.textUA}
             {/if}
             {if $row.image?}
               <a href="{$link}" class="slide">

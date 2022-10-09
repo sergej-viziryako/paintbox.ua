@@ -1,4 +1,4 @@
-{set $site_address = $_modx->config.site_url | replace:'/ua/':'/'}
+{set $site_address = $_modx->config.site_url | replace:'/ru/':'/'}
 {if $_modx->resource.template == 20}
     {if $_modx->config.cultureKey == 'ru'}
       <meta property="og:title" content="{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}">

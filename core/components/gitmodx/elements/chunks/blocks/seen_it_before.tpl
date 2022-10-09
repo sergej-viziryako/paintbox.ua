@@ -1,5 +1,5 @@
 {$_modx->runSnippet('!addLooked', ['templates'=>20, 'limit' => 10])}
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
   {set $lookedproducts = $_modx->runSnippet(
   'looked',
     [

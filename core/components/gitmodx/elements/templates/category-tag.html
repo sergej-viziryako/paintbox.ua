@@ -5,7 +5,7 @@
 {/if}
 {set $selecttags = $_modx->runSnippet('getSelecttagsValue', ['id' => "{$_modx->resource.id}"]) }
 
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
 {set $products = $_modx->runSnippet('!mFilter2Numberfield', [
 'element' => 'msProducts',
 'paginator' => 'pdoPage',
@@ -128,7 +128,7 @@ parent:categories,
       <section class="section- section-content">
         <div class="container">
           <div class="content">
-            {if $_modx->config.cultureKey != 'ru'}
+            {if $_modx->config.cultureKey != 'ua'}
               {$_modx->resource.localizator_content}
             {else}
               {$_modx->resource.content}

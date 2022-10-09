@@ -1,5 +1,5 @@
 {if $_pls['vendor.name']?}
-  {if $_modx->config.cultureKey != 'ru'}
+  {if $_modx->config.cultureKey != 'ua'}
     {var $vendor = $_modx->runSnippet('translit',['string'=>"{$_pls['vendor.name'] | lower | replace:"(":"" | replace:")":""}"])}
     {if $_modx->resource.template == 20}
       <div class="row">
@@ -23,7 +23,7 @@
   {/if}
 {/if}
 {if $made_in?}
-  {if $_modx->config.cultureKey != 'ru'}
+  {if $_modx->config.cultureKey != 'ua'}
     <div class="row">
       {var $madein = $_modx->runSnippet('translit',['string'=>"{$made_in | lower | replace:"(":"" | replace:")":""}"])}
       <span>{$_modx->lexicon('item_country')}:</span><span>{$_modx->lexicon($madein)}</span>

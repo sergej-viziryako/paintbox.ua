@@ -3,7 +3,7 @@
     {if $value?}
         {if $classes == ' field-article' OR $classes == ' field-price'}
             {$valcompare}
-        {elseif 'localizator_key' | option != 'ru'}
+        {elseif 'localizator_key' | option != 'ua'}
             {set $translit_valcompare = $_modx->runSnippet('translit',['string'=>"{$valcompare}"])}
             {$_modx->lexicon($translit_valcompare)}
         {else}

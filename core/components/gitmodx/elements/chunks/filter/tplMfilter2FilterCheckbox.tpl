@@ -1,7 +1,7 @@
 {$_modx->lexicon->load(('cultureKey' | option) ~ ':localizator:site')}
 {set $translit_text = $_modx->runSnippet('translit',['string'=>"{$title}"])}
 {set $pagetitle_lang = $_modx->runSnippet('getPagetitleLocalizator',['id'=>"{$value}", 'content'=>'pagetitle'])}
-{if $_modx->config.cultureKey != 'ru' }
+{if $_modx->config.cultureKey != 'ua' }
   {set $title_checkbox = $_modx->lexicon($translit_text| lower | replace:"(":"" | replace:")":"")}
 {else}
   {set $title_checkbox = $title}

@@ -57,21 +57,28 @@
 <table cellspacing="0" style='width: 190mm;margin: 0 auto 0 auto;border: 1px solid #000;'>
   <tr>
     <td style='{$style.th}' class="ramka1">№</td>
-    <td style='{$style.th}' class="ramka1">Фото</td>
+    <!--td style='{$style.th}' class="ramka1">Фото</td!-->
     <td style='{$style.th}' class="ramka1">Название</td>
     <td style='{$style.th}' class="ramka1">Кол-во, шт</td>
     <td style='{$style.th}' class="ramka1">Цена, грн</td>
     <td style='{$style.th}' class="ramka1">Сумма, грн</td>
   </tr>
     {foreach $products as $product}
+      {var $rgb = $_modx->runSnippet('msProductOptions',['product' => "{$product.id}", 'onlyOptions' => 'rgb', 'tpl' => 'tplProductOptionsColor'])}
       <tr>
         <td style='{$style.td}'>
             {$i}
             {set $i += 1}
         </td>
-        <td style='{$style.td}'>
-          <img src="{$_modx->config.site_url}{$product.thumb}" width="120" height="90"/>
-        </td>
+        <!--td style='{$style.td}'>
+          {if $product.options['size'] != ''}
+            {if $rgb?}
+              <div class="img" style="background: rgb({$rgb})!important;"></div>
+            {/if}
+          {else}
+            <img src="{$_modx->config.site_url}{$product.thumb}" width="120" height="90"/>
+          {/if}
+        </td-->
         <td style='{$style.tdname}'>
           <p>
               {$product.name}

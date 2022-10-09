@@ -12,7 +12,7 @@
         <div class="column column70">
           <div class="container">
             <div class="content">
-              {if $_modx->config.cultureKey != 'ru'}
+              {if $_modx->config.cultureKey != 'ua'}
                 {$_modx->resource.localizator_content}
               {else}
                 {$_modx->resource.content}
@@ -62,7 +62,7 @@
     </section>
     {include 'faq'}
 
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
       {set $services = $_modx->runSnippet(
       'pdoResources',
         [

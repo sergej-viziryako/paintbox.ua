@@ -7,7 +7,7 @@
   <div class="caption opener-row-filter">
     {if $filter in list ["price","vendor","parent","tags","color","size","series"]}
       {$_modx->lexicon('option_'~$filter~'')}:
-    {elseif $_modx->config.cultureKey != 'ru'}
+    {elseif $_modx->config.cultureKey != 'ua'}
       {$_modx->lexicon('option_'~$filter~'')}:
     {else}
       {$optionscaptionview}{if $optionscaptionmeasure?},{$optionscaptionmeasure}{/if}:

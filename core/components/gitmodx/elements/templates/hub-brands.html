@@ -11,7 +11,7 @@
       <div class="container">
         <div class="brands-block">
           <ul class="brands">
-            {if $_modx->config.cultureKey != 'ru'}
+            {if $_modx->config.cultureKey != 'ua'}
               {$_modx->runSnippet('!pdoPage',
               [
                 'elementClass' => 'modSnippet',
@@ -78,7 +78,7 @@
     <section class="section- section-content">
       <div class="container">
         <div class="content">
-          {if $_modx->config.cultureKey != 'ru'}
+          {if $_modx->config.cultureKey != 'ua'}
             {$_modx->resource.localizator_content}
           {else}
             {$_modx->resource.content}

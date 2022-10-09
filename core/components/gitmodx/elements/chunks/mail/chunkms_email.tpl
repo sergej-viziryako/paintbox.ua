@@ -10,7 +10,7 @@
 'td' => 'font-family: Arial;text-align: left;color: #111111;border: 1px solid #eee;padding: 10px;',
 ]}
 
-{var $site_url = ('site_url' | option) | preg_replace : '#/$#' : '' | replace:'/ua/':'/'}
+{var $site_url = ('site_url' | option) | preg_replace : '#/$#' : '' | replace:'/ru/':'/'}
 {var $assets_url = 'assets_url' | option}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,7 +25,7 @@
       {set $logo_pic = "{$site_url}/tpl/images/paint_box_logo_mail.jpg"}
       <a href="{$site_url}">
         <img style="{$style.logo}"
-             src="{$logo_pic | replace:'/ua/':'/'}"
+             src="{$logo_pic | replace:'/ru/':'/'}"
              alt="{$site_url}"
              height="62"/>
       </a>
@@ -66,7 +66,7 @@
                                     {if $rgb?}
                                         <div class="img" style="width:50px;height:50px;margin: 0 auto;background: rgb({$rgb})!important;"></div>
                                     {else}
-                                        <img src="{$logo_pic | replace:'/ua/':'/'}"
+                                        <img src="{$logo_pic | replace:'/ru/':'/'}"
                                              alt="{$product_name}"
                                              title="{$product_name}"
                                              width="120"/>
@@ -74,12 +74,12 @@
                                 {else}
                                     {if $product.thumb?}
                                       {var $product_pic = "{$site_url}{$product.thumb}"}
-                                      <img src="{$product_pic | replace:'/ua/':'/'}"
+                                      <img src="{$product_pic | replace:'/ru/':'/'}"
                                            alt="{$product_name}"
                                            title="{$product_name}"
                                            width="120" height="90"/>
                                     {else}
-                                      <img src="{$logo_pic | replace:'/ua/':'/'}"
+                                      <img src="{$logo_pic | replace:'/ru/':'/'}"
                                            alt="{$product_name}"
                                            title="{$product_name}"
                                            width="120"/>

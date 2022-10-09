@@ -1,4 +1,4 @@
-{set $site_address = $_modx->config.site_url | replace:'/ua/':'/'}
+{set $site_address = $_modx->config.site_url | replace:'/ru/':'/'}
 
 <script type="application/ld+json">
   {

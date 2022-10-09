@@ -5,10 +5,10 @@
         <a href="#" class="open-popup open-catalog">
           <i class="icon icon-book1 tablet"></i>
           <i class="icon icon-search"></i>
-            {if $_modx->config.cultureKey != 'ru'}
-              <span>{$_modx->config.catalog_nameUA}</span>
-            {else}
+            {if $_modx->config.cultureKey != 'ua'}
               <span>{$_modx->config.catalog_name}</span>
+            {else}
+              <span>{$_modx->config.catalog_nameUA}</span>
             {/if}
           <i class="icon-down-arrow"></i>
         </a>
@@ -16,10 +16,10 @@
       <div class="catalog-link opener desktop">
         <a href="{$_modx->makeUrl(160)}" class="">
           <i class="icon icon-book1"></i>
-            {if $_modx->config.cultureKey != 'ru'}
-              <span>{$_modx->config.catalog_nameUA}</span>
-            {else}
+            {if $_modx->config.cultureKey != 'ua'}
               <span>{$_modx->config.catalog_name}</span>
+            {else}
+              <span>{$_modx->config.catalog_nameUA}</span>
             {/if}
           <i class="icon-down-arrow"></i>
         </a>
@@ -27,7 +27,7 @@
       <div class="catalog-inner-block slide ">
         <div class="catalog-block scrollbar-dynamic">
           <ul class="catalog  accordion-catalog-inner">
-            {if $_modx->config.cultureKey != 'ru'}
+            {if $_modx->config.cultureKey != 'ua'}
               {set $items = $_modx->runSnippet('!pdoMenuFenom',
                 [
                 'parents' => 0,

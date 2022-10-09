@@ -8,7 +8,7 @@ $culture_key = $modx->getOption('cultureKey');
 if ($id == '') { return ''; } // Вывод если key пустой
 if ($content == '') { return ''; } // Вывод если key пустой
 
-if ($culture_key != 'ru') {
+if ($culture_key != 'ua') {
   if ($localContent = $modx->getObject('localizatorContent', array('resource_id' => $id, 'key' => $culture_key))){
     return $localContent->get($content);
   }

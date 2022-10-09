@@ -7,7 +7,7 @@
   'where' => '{"template:IN":[20]}'
 ] ?: '999999'}
 
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
   {set $products_results = $_modx->runSnippet('!mFilter2Numberfield', [
     'element' => 'msProducts',
     'paginator' => 'pdoPage',

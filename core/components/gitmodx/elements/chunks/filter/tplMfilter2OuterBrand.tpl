@@ -25,7 +25,7 @@
 
     <div class="column column80">
       <div class="brand-content-block">
-        {if $_modx->config.cultureKey != 'ru'}
+        {if $_modx->config.cultureKey != 'ua'}
           {set $content = $_modx->resource.localizator_content}
         {else}
           {set $content = $_modx->resource.content}

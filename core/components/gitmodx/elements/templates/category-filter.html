@@ -4,7 +4,7 @@
   {set $items_on_category_page = 12}
 {/if}
 
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
   {set $products = $_modx->runSnippet('!mFilter2Numberfield', [
     'element' => 'msProducts',
     'paginator' => 'pdoPage',
@@ -123,7 +123,7 @@
       <section class="section- section-content">
         <div class="container">
           <div class="content">
-            {if $_modx->config.cultureKey != 'ru'}
+            {if $_modx->config.cultureKey != 'ua'}
               {$_modx->resource.localizator_content}
             {else}
               {$_modx->resource.content}
@@ -136,7 +136,7 @@
     {/if}
 
     {set $related_articles = $_modx->resource.id | resource : 'related_articles'}
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
       {set $rel_articles = $_modx->runSnippet(
       'pdoResources',
         [

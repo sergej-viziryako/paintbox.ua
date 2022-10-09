@@ -14,12 +14,12 @@
       <div class="questansw-block">
         <ul class="questansw accordion-questansw" itemscope="" itemtype="https://schema.org/FAQPage">
           {foreach $rows as $row first=$first}
-            {if $_modx->config.cultureKey != 'ru'}
-              {set $question = $row.questionUA}
-              {set $answer = $row.answerUA}
+            {if $_modx->config.cultureKey != 'ua'}
+                {set $question = $row.question}
+                {set $answer = $row.answer}
             {else}
-              {set $question = $row.question}
-              {set $answer = $row.answer}
+                {set $question = $row.questionUA}
+                {set $answer = $row.answerUA}
             {/if}
             {if $question?}
               <li {if $first?}class="active"{/if} itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">

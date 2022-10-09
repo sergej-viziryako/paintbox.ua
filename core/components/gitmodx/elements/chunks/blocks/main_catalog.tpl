@@ -1,4 +1,4 @@
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
   {set $items = $_modx->runSnippet('!pdoMenuFenom',
   [
     'parents' => 160,

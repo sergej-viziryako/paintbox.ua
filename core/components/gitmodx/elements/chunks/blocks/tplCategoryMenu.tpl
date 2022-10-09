@@ -1,4 +1,4 @@
-{var $file_exists = $_modx->runSnippet('ifFileExist',['filename' => "{$item['icon'] | replace:'/ua/files/':'/files/'}"])}
+{var $file_exists = $_modx->runSnippet('ifFileExist',['filename' => "{$item['icon'] | replace:'/ru/files/':'/files/'}"])}
 {if $file_exists?}
   {set $picture = $item['icon']}
 {else}

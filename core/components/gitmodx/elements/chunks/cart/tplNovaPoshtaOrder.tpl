@@ -18,7 +18,7 @@
                         {var $checked = !($order.delivery in keys $deliveries) && $index == 0 || $delivery.id == $order.delivery}
                       <label class="delivery input-parent">
                         <input type="radio" style="box-shadow: none; padding: 0px; width: auto" name="delivery" value="{$delivery.id}" id="delivery_{$delivery.id}" data-payments="{$delivery.payments | json_encode}"{$checked ? 'checked' : ''}>
-                          {if 'cultureKey' | option != 'ru'}
+                          {if 'cultureKey' | option != 'ua'}
                               {var $delivery_method = $_modx->runSnippet('translit',['string'=>"{$delivery.name | lower | replace:"(":"" | replace:")":""}"])}
                               {if $delivery.logo?}
                                 <img src="{$delivery.logo}" alt="{$_modx->lexicon($delivery_method)}" title="{$_modx->lexicon($delivery_method)}"/>
@@ -62,7 +62,7 @@
                       <label class="payment input-parent">
                         <input style="box-shadow: none; padding: 0px; width: auto" type="radio" name="payment" value="{$payment.id}" id="payment_{$payment.id}" {*if $payment.id == 1}checked{/if*} {$checked}>
 
-                          {if 'cultureKey' | option != 'ru'}
+                          {if 'cultureKey' | option != 'ua'}
                               {var $payment_method = $_modx->runSnippet('translit',['string'=>"{$payment.name | lower | replace:"(":"" | replace:")":""}"])}
                               {if $payment.logo?}
                                 <img src="{$payment.logo}" alt="{$_modx->lexicon($payment_method)}" title="{$_modx->lexicon($payment_method)}"/>
@@ -198,10 +198,10 @@
                             {foreach $pls[$name] as $row}
                               <option value="{$row['Ref']}"
                                       data-name="{$row['Ref']}">
-                                  {if 'cultureKey' | option != 'ru'}
-                                      {$row['Description']}
-                                  {else}
+                                  {if 'cultureKey' | option != 'ua'}
                                       {$row['DescriptionRu']}
+                                  {else}
+                                      {$row['Description']}
                                   {/if}
                               </option>
                             {/foreach}
@@ -232,10 +232,10 @@
                         <select name="{$name}" class="input-sm form-control{($name in list $errors) ? ' error' : ''}" id="{$name}_pickup">
                           {foreach $pls[$name] as $row}
                             <option value="{$row['Ref']}" data-name="{$row['Ref']}">
-                                {if 'cultureKey' | option != 'ru'}
-                                    {$row['Description']}
-                                {else}
+                                {if 'cultureKey' | option != 'ua'}
                                     {$row['DescriptionRu']}
+                                {else}
+                                    {$row['Description']}
                                 {/if}
                             </option>
                           {/foreach}
@@ -263,10 +263,10 @@
                           <option value="" data-name="">-</option>
                           {foreach $pls[$name] as $row}
                             <option value="{$row['Ref']}" data-name="{$row['Ref']}">
-                              {if 'cultureKey' | option != 'ru'}
-                                {$row['Description']}
+                              {if 'cultureKey' | option != 'ua'}
+                                  {$row['DescriptionRu']}
                               {else}
-                                {$row['DescriptionRu']}
+                                  {$row['Description']}
                               {/if}
                             </option>
                           {/foreach}

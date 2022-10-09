@@ -2,7 +2,7 @@
   <section class="section- section-header-menu">
     <div class="container">
       <div class="block menu-block">
-        {if $_modx->config.cultureKey != 'ru'}
+        {if $_modx->config.cultureKey != 'ua'}
           {$_modx->runSnippet(
           'pdoMenu',
           [
@@ -16,6 +16,8 @@
             'cacheTime' => 3600,
             'includeTVs' => 'button_menu_color',
             'hereClass' => 'active',
+            'showUnpublished' => 0,
+            'showHidden' => 0,
             'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" : "localizator.resource_id = modResource.id"}}',
             'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
             'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
@@ -34,7 +36,9 @@
             'cache' => 1,
             'cacheTime' => 3600,
             'includeTVs' => 'button_menu_color',
-            'hereClass' => 'active'
+            'hereClass' => 'active',
+            'showUnpublished' => 0,
+            'showHidden' => 0,
             ]
           )}
         {/if}

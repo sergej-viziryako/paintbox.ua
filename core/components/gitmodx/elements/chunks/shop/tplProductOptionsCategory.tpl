@@ -1,6 +1,6 @@
 {foreach $data as $category => $options}
   {set $translit_category = $_modx->runSnippet('translit',['string'=>"{$category | lower | replace:"(":"" | replace:")":""}"])}
-  {if 'cultureKey' | option != 'ru'}
+  {if 'cultureKey' | option != 'ua'}
     {if $data | len > 1}
       <div class="block">
         <div class="row row-caption">

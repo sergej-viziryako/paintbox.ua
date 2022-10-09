@@ -159,10 +159,10 @@ function checkParams() {
 
 {if $_modx->config.show_cookie_info?}
   <script type="text/javascript" id="cookieinfo"
-    {if $_modx->config.cultureKey != 'ru'}
-      src="/tpl/js/cookieinfoUA.js"
-    {else}
+    {if $_modx->config.cultureKey != 'ua'}
       src="/tpl/js/cookieinfo.js"
+    {else}
+      src="/tpl/js/cookieinfoUA.js"
     {/if}
     data-bg="#333333"
     data-fg="#FFFFFF"

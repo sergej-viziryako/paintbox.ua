@@ -14,7 +14,7 @@
             <div>
               <span>{$_modx->lexicon('checkout_success_order_status')}: </span>
               <b>
-                {if 'cultureKey' | option != 'ru'}
+                {if 'cultureKey' | option != 'ua'}
                   {var $order_status = $_modx->runSnippet('!getOrderStatusName',['order_status_id' => "{$order.status}"])}
                   {var $order_status = $_modx->runSnippet('translit',['string'=>"{$order_status | lower | replace:"(":"" | replace:")":""}"])}
                   {$_modx->lexicon($order_status)}
@@ -26,7 +26,7 @@
             <div>
               <span>{$_modx->lexicon('checkout_success_payment_method')}: </span>
               <b>
-                {if 'cultureKey' | option != 'ru'}
+                {if 'cultureKey' | option != 'ua'}
                   {var $payment_method = $_modx->runSnippet('translit',['string'=>"{$payment.name | lower | replace:"(":"" | replace:")":""}"])}
                   {$_modx->lexicon($payment_method)}
                 {else}
@@ -37,7 +37,7 @@
             <div>
               <span>{$_modx->lexicon('checkout_success_delivery_method')}: </span>
               <b>
-                {if 'cultureKey' | option != 'ru'}
+                {if 'cultureKey' | option != 'ua'}
                   {var $delivery_method = $_modx->runSnippet('translit',['string'=>"{$delivery.name | lower | replace:"(":"" | replace:")":""}"])}
                   {$_modx->lexicon($delivery_method)}
                 {else}
@@ -45,7 +45,7 @@
                 {/if}
               </b>
               {if $order.properties.msnovaposhta.warehouse?}
-                {if 'cultureKey' | option != 'ru'}
+                {if 'cultureKey' | option != 'ua'}
                   <p>{$order.properties.msnovaposhta.warehouse.SettlementAreaDescription}, м. {$order.properties.msnovaposhta.warehouse.CityDescription}, {$order.properties.msnovaposhta.warehouse.Description}</p>
                 {else}
                   <p>{$order.properties.msnovaposhta.area} область, г. {$order.properties.msnovaposhta.warehouse.CityDescriptionRu}, {$order.properties.msnovaposhta.warehouse.DescriptionRu}</p>

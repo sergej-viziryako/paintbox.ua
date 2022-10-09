@@ -4,7 +4,7 @@
 	{set $items_on_category_page = 5}
 {/if}
 
-{if $_modx->config.cultureKey != 'ru'}
+{if $_modx->config.cultureKey != 'ua'}
 	{set $other_items = $_modx->runSnippet(
 	'msProducts',
 	[

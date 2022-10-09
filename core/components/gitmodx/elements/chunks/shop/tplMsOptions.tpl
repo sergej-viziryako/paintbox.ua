@@ -9,7 +9,7 @@
     <span>
       {foreach $options as $name => $values}
         <select name="options[{$name}]" id="option_{$name}">
-          {if 'localizator_key' | option != 'ru'}
+          {if 'localizator_key' | option != 'ua'}
             {foreach $values as $value}
               {set $translit_text_option = $_modx->runSnippet('translit',['string'=>"{$value | lower | replace:"(":"" | replace:")":""}"])}
               <option value="{$value}">{$_modx->lexicon($translit_text_option)}</option>

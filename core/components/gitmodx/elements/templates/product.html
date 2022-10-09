@@ -191,7 +191,7 @@
                     </ul>
                   </div>
                 </div>
-                {if $_modx->config.cultureKey != 'ru'}
+                {if $_modx->config.cultureKey != 'ua'}
                 {set $introtext = $_modx->resource.introtext?:$_modx->resource.localizator_content}
                 {set $content = $_modx->resource.localizator_content}
                 {else}
@@ -244,7 +244,7 @@
                           <li>
                             <a href="/files/{$row.image}" target="_blank">
                               <i class="icon-download"></i>
-                              {if $_modx->config.cultureKey != 'ru'}
+                              {if $_modx->config.cultureKey != 'ua'}
                                 <span>{$row.description_ukr}</span>
                               {else}
                                 <span>{$row.description}</span>
@@ -317,7 +317,7 @@
         </div>
         <div class="services-block">
           <ul class="services">
-            {if $_modx->config.cultureKey != 'ru'}
+            {if $_modx->config.cultureKey != 'ua'}
             {$_modx->runSnippet(
             'pdoResources',
             [
@@ -363,7 +363,7 @@
     {/if}
 
     {set $category_related_items = $_modx->resource.parent | resource : 'related_items'}
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
     {set $related_items = $_modx->runSnippet(
     'msProducts',
     [
@@ -447,7 +447,7 @@
     {/if}
 
     {set $related_articles = $_modx->resource.parent | resource : 'related_articles'}
-    {if $_modx->config.cultureKey != 'ru'}
+    {if $_modx->config.cultureKey != 'ua'}
     {set $rel_articles = $_modx->runSnippet(
     'pdoResources',
     [

@@ -5,12 +5,12 @@
       <div class="advant-block">
         <ul class="advant">
           {foreach $rows as $row}
-            {if $_modx->config.cultureKey != 'ru'}
-              {set $title = $row.titleUA}
-              {set $desc = $row.descUA}
+            {if $_modx->config.cultureKey != 'ua'}
+                {set $title = $row.title}
+                {set $desc = $row.desc}
             {else}
-              {set $title = $row.title}
-              {set $desc = $row.desc}
+                {set $title = $row.titleUA}
+                {set $desc = $row.descUA}
             {/if}
             <li>
               <div class="inner">

@@ -1,7 +1,7 @@
-{if $_modx->config.cultureKey != 'ru'}
-  {set $adress = $_modx->config.adressUA}
-{else}
+{if $_modx->config.cultureKey != 'ua'}
   {set $adress = $_modx->config.adress}
+{else}
+  {set $adress = $_modx->config.adressUA}
 {/if}
 {if $adress?}
   <div class="block contacts-block">
@@ -22,10 +22,10 @@
 </div>
 <div class="time-block">
   <ul class="time">
-    {if $_modx->config.cultureKey != 'ru'}
-      {$_modx->config.working_hoursUA}
-    {else}
+    {if $_modx->config.cultureKey != 'ua'}
       {$_modx->config.working_hours}
+    {else}
+      {$_modx->config.working_hoursUA}
     {/if}
   </ul>
 </div>

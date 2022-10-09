@@ -16,7 +16,7 @@ if (!$localContent = $modx->getObject('localizatorContent', array('resource_id' 
     return;
 }
 
-if ($culture_key != 'ru') {
+if ($culture_key != 'ua') {
   if (!empty($localContent)) {
     return $localContent->get($content);
   }

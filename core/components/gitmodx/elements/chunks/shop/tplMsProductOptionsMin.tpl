@@ -4,7 +4,7 @@
   {set $translit_measureunit = $_modx->runSnippet('translit',['string'=>"{$measureunit | lower | replace:"(":"" | replace:")":""}"])}
 
   {if $option.key != 'artikul'}
-    {if 'cultureKey' | option != 'ru'}
+    {if 'cultureKey' | option != 'ua'}
       {if $option.value[0]}
         <div class="row">
           <span>{$_modx->lexicon($captioname) | ucfirst}{if $measureunit}, {$_modx->lexicon($translit_measureunit)}{/if}:</span>

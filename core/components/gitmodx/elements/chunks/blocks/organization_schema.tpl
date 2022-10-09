@@ -1,4 +1,4 @@
-{set $site_addressOrganization = $_modx->config.site_url | replace:'/ua/':'/'}
+{set $site_addressOrganization = $_modx->config.site_url | replace:'/ru/':'/'}
 {if $_modx->config.cultureKey == 'ru'}
   {set $adressOrganization = $_modx->config.adress}
   {set $cityOrganization = $_modx->config.city}

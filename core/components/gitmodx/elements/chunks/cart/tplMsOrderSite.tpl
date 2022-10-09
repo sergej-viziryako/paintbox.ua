@@ -26,7 +26,7 @@
                       <label class="payment input-parent">
                         <input style="box-shadow: none; padding: 0px; width: auto" type="radio" name="payment" value="{$payment.id}" id="payment_{$payment.id}" {*if $payment.id == 1}checked{/if*} {$checked}>
 
-                          {if 'cultureKey' | option != 'ru'}
+                          {if 'cultureKey' | option != 'ua'}
                               {var $payment_method = $_modx->runSnippet('translit',['string'=>"{$payment.name | lower | replace:"(":"" | replace:")":""}"])}
                               {if $payment.logo?}
                                 <img src="{$payment.logo}" alt="{$_modx->lexicon($payment_method)}" title="{$_modx->lexicon($payment_method)}"/>
@@ -113,7 +113,7 @@
                       {var $checked = !($order.delivery in keys $deliveries) && $index == 0 || $delivery.id == $order.delivery}
                       <label class="delivery input-parent">
                       <input type="radio" style="box-shadow: none; padding: 0px; width: auto" name="delivery" value="{$delivery.id}" id="delivery_{$delivery.id}" data-payments="{$delivery.payments | json_encode}"{$checked ? 'checked' : ''}>
-                      {if 'cultureKey' | option != 'ru'}
+                      {if 'cultureKey' | option != 'ua'}
                         {var $delivery_method = $_modx->runSnippet('translit',['string'=>"{$delivery.name | lower | replace:"(":"" | replace:")":""}"])}
                         {if $delivery.logo?}
                           <img src="{$delivery.logo}" alt="{$_modx->lexicon($delivery_method)}" title="{$_modx->lexicon($delivery_method)}"/>

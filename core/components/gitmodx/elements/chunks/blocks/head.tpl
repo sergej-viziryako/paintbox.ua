@@ -3,20 +3,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {if $_modx->resource.template == 20}
-{insert 'metaTagsForProducts'}
+  {insert 'metaTagsForProducts'}
 {elseif $_modx->resource.template in list [24,37]}
-{insert 'metaTagsForCategories'}
+  {insert 'metaTagsForCategories'}
+
+{elseif $_modx->resource.template in list [44]}
+
+  {if $_modx->config.cultureKey == 'ua'}
+    <title>{$_modx->resource.metaTitleUa?:'Каталог автомобільних фарб '~$_modx->resource.pagetitle~' | PaintBox'}</title>
+    <meta name="description" content="{$_modx->resource.metaDescriptionUa?:'Каталог автомобільних фарб 【'~$_modx->resource.pagetitle~'】в інтернет-магазині ➡ Paintbox ☝ Купити автофарбу для ['~$_modx->resource.pagetitle~'] ✅ Широкий каталог автомобільних фарб ✈️ Швидка доставка по всій Україні ✨ Доступна ціна ☎ +38 (067) 328 28 94'}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywordsUa?:$_modx->resource.pagetitle}" />
+  {/if}
+  {if $_modx->config.cultureKey == 'ru'}
+    <title>{$_modx->resource.metaTitle?:'Каталог автомобильных красок '~$_modx->resource.pagetitle~' | PaintBox'}</title>
+    <meta name="description" content="{$_modx->resource.metaDescription?:'Каталог автомобильных красок【'~$_modx->resource.pagetitle~'】в интернет-магазине ➡ Paintbox ☝ Купить автокраску для ['~$_modx->resource.pagetitle~'] ✅ Широкий каталог автомобильных красок ✈️ Быстрая доставка по всей Украине ✨ Доступная цена ☎ +38 (067) 328 28 94'}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
+  {/if}
+
+
+
+
+
 {else}
-{if $_modx->config.cultureKey == 'ru'}
-  <title>{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
-  <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle}" />
-  <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
-{/if}
-{if $_modx->config.cultureKey == 'ua'}
-  <title>{$_modx->resource.metaTitleUa?:$_modx->resource.pagetitle}</title>
-  <meta name="description" content="{$_modx->resource.metaDescriptionUa?:$_modx->resource.pagetitle}" />
-  <meta name="keywords" content="{$_modx->resource.metaKeywordsUa?:$_modx->resource.pagetitle}" />
-{/if}
+  {if $_modx->config.cultureKey == 'ru'}
+    <title>{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+    <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
+  {/if}
+  {if $_modx->config.cultureKey == 'ua'}
+    <title>{$_modx->resource.metaTitleUa?:$_modx->resource.pagetitle}</title>
+    <meta name="description" content="{$_modx->resource.metaDescriptionUa?:$_modx->resource.pagetitle}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywordsUa?:$_modx->resource.pagetitle}" />
+  {/if}
 {/if}
 <link rel="preload" href="/tpl/fonts/Commissioner-Light.woff" as="font" type="font/woff" crossorigin="anonymous">
 <link rel="preload" href="/tpl/fonts/Commissioner-Medium.woff" as="font" type="font/woff" crossorigin="anonymous">
@@ -39,6 +57,11 @@
 {if $_modx->resource.id in list [140,141,161,403,405,406,29103]}
 <meta name="robots" content="noindex, nofollow" />
 {/if}
+
+{if $_modx->resource.template in list [45]}
+  <meta name="robots" content="noindex, nofollow" />
+{/if}
+
 {if $_modx->resource.id == 29284 AND $_modx->config.cultureKey != 'ru'}
 <meta name="robots" content="noindex, nofollow" />
 {/if}

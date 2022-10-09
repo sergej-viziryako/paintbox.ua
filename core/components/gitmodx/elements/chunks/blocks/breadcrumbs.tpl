@@ -1,10 +1,10 @@
 <section class="section- section-breadcrumbs">
   <div class="container">
-      {if $_modx->config.cultureKey != 'ru'}
+      {if $_modx->config.cultureKey != 'ua'}
         {if $_modx->config.first_breadcrumbUA?}
-          {set $first_breadcrumb = $_modx->config.first_breadcrumbUA}
+          {set $first_breadcrumb = $_modx->config.first_breadcrumb}
         {else}
-          {set $first_breadcrumb = 'Головна'}
+          {set $first_breadcrumb = 'Главная'}
         {/if}
         {$_modx->runSnippet(
         'pdoCrumbs',
@@ -24,9 +24,9 @@
       )}
       {else}
         {if $_modx->config.first_breadcrumb?}
-          {set $first_breadcrumb = $_modx->config.first_breadcrumb}
+          {set $first_breadcrumb = $_modx->config.first_breadcrumbUA}
         {else}
-          {set $first_breadcrumb = 'Главная'}
+          {set $first_breadcrumb = 'Головна'}
         {/if}
         {$_modx->runSnippet(
         'pdoCrumbs',
@@ -42,6 +42,10 @@
           ]
         )}
       {/if}
-      <h1>{$_modx->runSnippet('metaTagsh1')}</h1>
+      {if $_modx->config.cultureKey != 'ua'}
+          <h1>{$_modx->resource.h1?:$_modx->resource.pagetitle}</h1>
+      {else}
+          <h1>{$_modx->resource.h1Ua?:$_modx->resource.pagetitle}</h1>
+      {/if}
   </div>
 </section>

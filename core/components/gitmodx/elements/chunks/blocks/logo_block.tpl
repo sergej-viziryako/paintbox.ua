@@ -6,17 +6,17 @@
           <i class="{$_modx->config.site_icon}"></i>
         </span>
         <span class="caption">
-          {if $_modx->config.cultureKey != 'ru'}
-            {$_modx->config.site_global_nameUA}
+          {if $_modx->config.cultureKey != 'ua'}
+              {$_modx->config.site_global_name}
           {else}
-            {$_modx->config.site_global_name}
+              {$_modx->config.site_global_nameUA}
           {/if}
         </span>
         <span class="text">
-          {if $_modx->config.cultureKey != 'ru'}
-            {$_modx->config.sloganUA}
+          {if $_modx->config.cultureKey != 'ua'}
+              {$_modx->config.slogan}
           {else}
-            {$_modx->config.slogan}
+              {$_modx->config.sloganUA}
           {/if}
         </span>
       {else}

@@ -28,7 +28,7 @@
       </div>
       <div class="slices-sort-block ">
         <div class="filter-slices-block">
-          {if $_modx->config.cultureKey != 'ru'}
+          {if $_modx->config.cultureKey != 'ua'}
             {set $tags = $_modx->runSnippet(
             'pdoResources',
               [
