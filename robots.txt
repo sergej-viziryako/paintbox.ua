@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /
+Allow: /*/*.js
+Allow: /*/*.css
+Allow: */files/*
+Allow: */images/*
+Disallow: /core/
+Disallow: /assets/
+Disallow: /manager/
+Disallow: /cdn-cgi/
+Disallow: /connectors/
+Disallow: ?sort
+Disallow: /obrane
+Disallow: /compare
+Disallow: /profil
+Disallow: /reestracziya
+
+Sitemap: https://paintbox.ua/sitemap.xml

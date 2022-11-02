@@ -1,5 +1,6 @@
 <section class="section- section-breadcrumbs">
   <div class="container">
+
       {if $_modx->config.cultureKey != 'ua'}
         {if $_modx->config.first_breadcrumbUA?}
           {set $first_breadcrumb = $_modx->config.first_breadcrumb}
@@ -9,7 +10,7 @@
         {$_modx->runSnippet(
         'pdoCrumbs',
         [
-          'tpl' => '@INLINE <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a rel="{$menutitle}" itemprop="item"  href="{$link}"><span itemprop="name">{$menutitle}</span></a><meta itemprop="position" content="{$idx}" /></li>',
+          'tpl' => 'tplpdocrumbsitem',
           'tplHome' => '@INLINE <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a rel='~$first_breadcrumb~'  itemprop="item"  href='~$_modx->config.site_url~'><span itemprop="name">'~$first_breadcrumb~'</span><i class="icon-house"></i></a><meta itemprop="position" content="{$idx}" /></li>',
           'tplWrapper' => '@INLINE <ul class="breadcrumbs scrollbar-macosx" itemscope itemtype="https://schema.org/BreadcrumbList">{$output}</ul>',
           'outputSeparator' => '<span>/</span>',
@@ -31,7 +32,7 @@
         {$_modx->runSnippet(
         'pdoCrumbs',
           [
-          'tpl' => '@INLINE <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a rel="{$menutitle}" itemprop="item"  href="{$link}"><span itemprop="name">{$menutitle}</span></a><meta itemprop="position" content="{$idx}" /></li>',
+          'tpl' => 'tplpdocrumbsitem',
           'tplHome' => '@INLINE <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a rel='~$first_breadcrumb~'  itemprop="item"  href='~$_modx->config.site_url~'><span itemprop="name">'~$first_breadcrumb~'</span><i class="icon-house"></i></a><meta itemprop="position" content="{$idx}" /></li>',
           'tplWrapper' => '@INLINE <ul class="breadcrumbs scrollbar-macosx" itemscope itemtype="https://schema.org/BreadcrumbList">{$output}</ul>',
           'outputSeparator' => '<span>/</span>',
@@ -42,10 +43,22 @@
           ]
         )}
       {/if}
-      {if $_modx->config.cultureKey != 'ua'}
-          <h1>{$_modx->resource.h1?:$_modx->resource.pagetitle}</h1>
+
+
+      {if $_modx->resource.template in list [44]}
+          {if $_modx->config.cultureKey != 'ua'}
+              <h1>{$_modx->resource.h1?:'Автокраска для автомобиля '~$_modx->resource.pagetitle}</h1>
+          {else}
+              <h1>{$_modx->resource.h1Ua?:'Автофарба для автомобіля '~$_modx->resource.pagetitle}</h1>
+          {/if}
       {else}
-          <h1>{$_modx->resource.h1Ua?:$_modx->resource.pagetitle}</h1>
+          {if $_modx->config.cultureKey != 'ua'}
+              <h1>{$_modx->resource.h1?:$_modx->resource.pagetitle}</h1>
+          {else}
+              <h1>{$_modx->resource.h1Ua?:$_modx->resource.pagetitle}</h1>
+          {/if}
       {/if}
+
+
   </div>
 </section>

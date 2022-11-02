@@ -3,7 +3,7 @@
   [
     'element' => 'msProducts',
     'paginator' => 'pdoPage',
-    'parents' => 160,
+    'parents' => "{$_modx->resource.parent_id?:'160'}",
     'limit' => 12,
     'maxLimit' => 0,
     'depth' => 6,
@@ -53,7 +53,7 @@
   [
     'element' => 'msProducts',
     'paginator' => 'pdoPage',
-    'parents' => 160,
+    'parents' => "{$_modx->resource.parent_id?:'160'}",
     'limit' => 12,
     'maxLimit' => 0,
     'depth' => 6,

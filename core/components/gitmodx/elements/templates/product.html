@@ -285,7 +285,7 @@
     </section>
     {/if}
 
-    {if $item_characteristics?}
+    {*if $item_characteristics?*}
     <section class="section- section-content section-feature bg-cbg" id="feature">
       <div class="container">
         <div class="section-caption">
@@ -297,13 +297,28 @@
         <div class="content-block">
           <div class="content">
             <div class="feature">
+              {set $rows_characteristics = json_decode($_modx->resource.characteristics, true)}
+              {foreach $rows_characteristics as $row}
+                {if $_modx->config.cultureKey != 'ua'}
+                  <div class="row column-no-category">
+                    <span>{$row.table1?:$row.table1ua}</span>
+                    <span>{$row.table2?:$row.table2ua}</span>
+                  </div>
+                {else}
+                  <div class="row column-no-category">
+                    <span>{$row.table1ua}</span>
+                    <span>{$row.table2ua}</span>
+                  </div>
+                {/if}
+              {/foreach}
+
               {$item_characteristics}
             </div>
           </div>
         </div>
       </div>
     </section>
-    {/if}
+    {*/if*}
 
     {set $related_services = $_modx->resource.parent | resource : 'related_services'}
     {if $related_services?}

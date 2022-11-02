@@ -8,7 +8,6 @@
   {insert 'metaTagsForCategories'}
 
 {elseif $_modx->resource.template in list [44]}
-
   {if $_modx->config.cultureKey == 'ua'}
     <title>{$_modx->resource.metaTitleUa?:'Каталог автомобільних фарб '~$_modx->resource.pagetitle~' | PaintBox'}</title>
     <meta name="description" content="{$_modx->resource.metaDescriptionUa?:'Каталог автомобільних фарб 【'~$_modx->resource.pagetitle~'】в інтернет-магазині ➡ Paintbox ☝ Купити автофарбу для ['~$_modx->resource.pagetitle~'] ✅ Широкий каталог автомобільних фарб ✈️ Швидка доставка по всій Україні ✨ Доступна ціна ☎ +38 (067) 328 28 94'}" />
@@ -19,11 +18,6 @@
     <meta name="description" content="{$_modx->resource.metaDescription?:'Каталог автомобильных красок【'~$_modx->resource.pagetitle~'】в интернет-магазине ➡ Paintbox ☝ Купить автокраску для ['~$_modx->resource.pagetitle~'] ✅ Широкий каталог автомобильных красок ✈️ Быстрая доставка по всей Украине ✨ Доступная цена ☎ +38 (067) 328 28 94'}" />
     <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
   {/if}
-
-
-
-
-
 {else}
   {if $_modx->config.cultureKey == 'ru'}
     <title>{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>

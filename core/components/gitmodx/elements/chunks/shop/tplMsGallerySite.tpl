@@ -1,15 +1,23 @@
-{set $i = 2}
+{set $i = 1}
+
+{if $_modx->config.cultureKey != 'ua'}
+    {set $array_keyword = ['купить','заказать','цена','стоимость']}
+{else}
+    {set $array_keyword = ['купити','заказати','ціна','вартість']}
+{/if}
+
+
 {if $files?}
   <div class="my-gallery slider-for">
     {foreach $files as $file}
       <li class="item" data-color="{$file['name']}">
         {if 'standard' | mobiledetect?}
           <a href="{$file['full']}" data-lightbox="roadtrip">
-            <img class="lazy" data-src="{$file['big']}" alt="Фото {$i} - {$_modx->resource.pagetitle}" />
+            <img class="lazy" data-src="{$file['big']}" title="{$_modx->resource.pagetitle} - Фото № {$i}" alt="{$_modx->resource.pagetitle} {$array_keyword[$i]}" />
           </a>
         {else}
           <a href="{$file['big']}" data-lightbox="roadtrip">
-            <img class="lazy" data-src="{$file['small']}" alt="Фото {$i} - {$_modx->resource.pagetitle}" />
+            <img class="lazy" data-src="{$file['small']}" title="{$_modx->resource.pagetitle} - Фото № {$i}" alt="{$_modx->resource.pagetitle}" />
           </a>
         {/if}
       </li>

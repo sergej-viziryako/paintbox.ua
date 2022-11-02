@@ -97,6 +97,56 @@
           </div>
         </div>
       </div>
+
+      {if $_modx->config.cultureKey != 'ua'}
+        {set $tags_vendor = $_modx->runSnippet(
+        'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.id}",
+        'tpl' => 'tplMenu',
+        'depth' => 0,
+        'limit' => 300,
+        'sortby' => 'pagetitle',
+        'sortdir' => 'ASC',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img',
+        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :"localizator.resource_id = modResource.id"}}',
+        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'","template:IN":[39]}',
+        ]
+        )}
+      {else}
+        {set $tags_vendor = $_modx->runSnippet(
+        'pdoResources',
+        [
+        'elementClass' => 'modSnippet',
+        'parents' => "{$_modx->resource.id}",
+        'tpl' => 'tplMenu',
+        'depth' => 0,
+        'limit' => 300,
+        'sortby' => 'pagetitle',
+        'sortdir' => 'ASC',
+        'where' => '{"template:IN":[39]}',
+        'tvPrefix' => '',
+        'includeContent' => 1,
+        'includeTVs' => 'img'
+        ]
+        )}
+      {/if}
+      {if $tags_vendor?}
+        <div class="slices-sort-block slices-sort-block-all">
+          <div class="filter-slices-block">
+            <div class="slices-block">
+              <ul class="slices">
+                {$tags_vendor}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {/if}
+
       <div class="products-block">
         <ul id="mse2_results" class="products">
           {$results}
@@ -105,6 +155,54 @@
       <div class="pagination-block mse2_pagination">
         {$_modx->getPlaceholder('page.nav')}
       </div>
+
+      <div class="filter-slices-block">
+        {if $_modx->config.cultureKey != 'ua'}
+          {set $tags_city = $_modx->runSnippet(
+          'pdoResources',
+          [
+          'elementClass' => 'modSnippet',
+          'parents' => "{$_modx->resource.id}",
+          'tpl' => 'tplMenu',
+          'depth' => 0,
+          'limit' => 300,
+          'sortby' => 'menuindex',
+          'sortdir' => 'ASC',
+          'tvPrefix' => '',
+          'includeContent' => 1,
+          'includeTVs' => 'img',
+          'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :"localizator.resource_id = modResource.id"}}',
+          'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+          'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'","template:IN":[46]}',
+          ]
+          )}
+        {else}
+          {set $tags_city = $_modx->runSnippet(
+          'pdoResources',
+          [
+          'elementClass' => 'modSnippet',
+          'parents' => "{$_modx->resource.id}",
+          'tpl' => 'tplMenu',
+          'depth' => 0,
+          'limit' => 300,
+          'sortby' => 'menuindex',
+          'sortdir' => 'ASC',
+          'where' => '{"template:IN":[46]}',
+          'tvPrefix' => '',
+          'includeContent' => 1,
+          'includeTVs' => 'img'
+          ]
+          )}
+        {/if}
+        {if $tags_city?}
+          <div class="slices-block">
+            <ul class="slices">
+              {$tags_city}
+            </ul>
+          </div>
+        {/if}
+      </div>
+
     </div>
   </div>
 {else}

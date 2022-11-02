@@ -49,6 +49,7 @@ return array(
         'msExtraAddressFields'
     ),
     'OnPageNotFound' => array(
-        'msFavoriter'
+        'msFavoriter',
+        'not_found'
     )
 );

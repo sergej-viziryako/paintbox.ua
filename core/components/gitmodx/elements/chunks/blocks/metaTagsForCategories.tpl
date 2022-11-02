@@ -25,10 +25,15 @@
   {set $gen_title = $title?:$_modx->resource.pagetitle}
   {set $gen_description = $description?:$_modx->resource.pagetitle}
   {set $gen_keywords = $keywords?:$_modx->resource.pagetitle}
-
-  <title>{$gen_title | replace:"\"":""}</title>
-  <meta name="description" content="{$gen_description | replace:"\"":""}" />
-  <meta name="keywords" content="{$gen_keywords | replace:"\"":""}" />
+  {if $.get.page}
+    <title>Страница - {$.get.page} | {$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+    <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle} | Страница - {$.get.page}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle} | Страница - {$.get.page}" />
+  {else}
+    <title>{$gen_title | replace:"\"":""}</title>
+    <meta name="description" content="{$gen_description | replace:"\"":""}" />
+    <meta name="keywords" content="{$gen_keywords | replace:"\"":""}" />
+  {/if}
 {else}
   {set $category_name_ukr = $_modx->runSnippet('!getContentLanguage', ['id' => "{$_modx->resource.id}",'content' =>'pagetitle' ])}
   {if $category_name_ukr ==''}
@@ -56,7 +61,13 @@
   {set $gen_description = $description?:$_modx->resource.pagetitle}
   {set $gen_keywords = $keywords?:$_modx->resource.pagetitle}
 
-  <title>{$gen_title}</title>
-  <meta name="description" content="{$gen_description | replace:"\"":""}" />
-  <meta name="keywords" content="{$gen_keywords | replace:"\"":""}" />
+  {if $.get.page}
+    <title>Сторінка - {$.get.page} | {$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+    <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle} | Сторінка - {$.get.page}" />
+    <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle} | Сторінка - {$.get.page}" />
+  {else}
+    <title>{$gen_title}</title>
+    <meta name="description" content="{$gen_description | replace:"\"":""}" />
+    <meta name="keywords" content="{$gen_keywords | replace:"\"":""}" />
+  {/if}
 {/if}
