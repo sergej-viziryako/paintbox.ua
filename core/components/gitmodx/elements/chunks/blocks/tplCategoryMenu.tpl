@@ -8,20 +8,38 @@
 {if $item['children']?}
   <li>
     <div class="openerlink">
-      <a href="{$item['id'] | url}" class="caption opener-inner">
-        {if $picture? AND 'standard' | mobiledetect}
-          <span class="img">
-            <img class="lazy" data-src="/files/{$picture}" alt="" height="50" width="50">
+      {if $item['id'] == $_modx->resource.id}
+          <span href="{$item['id'] | url}" class="caption opener-inner">
+              {if $picture? AND 'standard' | mobiledetect}
+                  <span class="img">
+                <img class="lazy" data-src="/files/{$picture}" alt="" height="50" width="50">
+              </span>
+              {/if}
+              <span>{$item['pagetitle']}</span>
+              <span class="icon">
+              <i class="icon-down-arrow"></i>
+            </span>
           </span>
-        {/if}
-        <span>{$item['pagetitle']}</span>
-        <span class="icon">
-          <i class="icon-down-arrow"></i>
-        </span>
-      </a>
-      <a href="{$item['id'] | url}" class="linkto">
-        <i class="icon-right-arrow"></i>
-      </a>
+          <span href="{$item['id'] | url}" class="linkto">
+              <i class="icon-right-arrow"></i>
+          </span>
+      {else}
+          <a href="{$item['id'] | url}" class="caption opener-inner">
+            {if $picture? AND 'standard' | mobiledetect}
+              <span class="img">
+                <img class="lazy" data-src="/files/{$picture}" alt="" height="50" width="50">
+              </span>
+            {/if}
+            <span>{$item['pagetitle']}</span>
+            <span class="icon">
+              <i class="icon-down-arrow"></i>
+            </span>
+          </a>
+          <a href="{$item['id'] | url}" class="linkto">
+            <i class="icon-right-arrow"></i>
+          </a>
+      {/if}
+
     </div>
     <div class="slide-inner">
       {if $_modx->config.catalog_items_count?}

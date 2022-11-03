@@ -518,6 +518,20 @@ select:disabled {
   background: #ccc;
 }
 
+.menu li.active .active-item {
+  height: 100%;
+  font-size: 15px;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+  background: #ed1f24;
+}
+
+.footer .footer-menu li .active-item {
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
 @media (max-width: 767px) {
   .content .feature .column-no-category {
     width: 100%;

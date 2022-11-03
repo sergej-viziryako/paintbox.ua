@@ -20,14 +20,26 @@
   {/if}
 {else}
   {if $_modx->config.cultureKey == 'ru'}
-    <title>{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
-    <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle}" />
-    <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
+      {if $.get.page}
+          <title>Страница - {$.get.page} | {$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+          <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle} | Страница - {$.get.page}" />
+          <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle} | Страница - {$.get.page}" />
+      {else}
+          <title>{$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+          <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle}" />
+          <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle}" />
+      {/if}
   {/if}
   {if $_modx->config.cultureKey == 'ua'}
-    <title>{$_modx->resource.metaTitleUa?:$_modx->resource.pagetitle}</title>
-    <meta name="description" content="{$_modx->resource.metaDescriptionUa?:$_modx->resource.pagetitle}" />
-    <meta name="keywords" content="{$_modx->resource.metaKeywordsUa?:$_modx->resource.pagetitle}" />
+      {if $.get.page}
+          <title>Сторінка - {$.get.page} | {$_modx->resource.metaTitle?:$_modx->resource.pagetitle}</title>
+          <meta name="description" content="{$_modx->resource.metaDescription?:$_modx->resource.pagetitle} | Сторінка - {$.get.page}" />
+          <meta name="keywords" content="{$_modx->resource.metaKeywords?:$_modx->resource.pagetitle} | Сторінка - {$.get.page}" />
+      {else}
+         <title>{$_modx->resource.metaTitleUa?:$_modx->resource.pagetitle}</title>
+         <meta name="description" content="{$_modx->resource.metaDescriptionUa?:$_modx->resource.pagetitle}" />
+         <meta name="keywords" content="{$_modx->resource.metaKeywordsUa?:$_modx->resource.pagetitle}" />
+    {/if}
   {/if}
 {/if}
 <link rel="preload" href="/tpl/fonts/Commissioner-Light.woff" as="font" type="font/woff" crossorigin="anonymous">
@@ -53,9 +65,11 @@
 {/if}
 
 {if $_modx->resource.template in list [45]}
-  <meta name="robots" content="noindex, nofollow" />
+<meta name="robots" content="noindex, nofollow" />
 {/if}
-
+{if $_modx->resource.id in list [412]}
+<meta name="robots" content="index, follow, noarchive" />
+{/if}
 {if $_modx->resource.id == 29284 AND $_modx->config.cultureKey != 'ru'}
 <meta name="robots" content="noindex, nofollow" />
 {/if}
