@@ -9,7 +9,7 @@
       <div class="rating__star rating__star_1" data-title="1"></div>
     </div>
   </div>
-  <span>
-    {$_modx->lexicon('rating')}:<span> [[+rating_value]]/5 - {$_modx->lexicon('rating_voices')}: [[+rating_count]]</span>
+  <span class="rating-description">
+    {*$_modx->lexicon('rating')*}<span> [[+rating_value]]/5 - {$_modx->lexicon('rating_voices')}: [[+rating_count]]</span>
   </span>
 </div>

@@ -50,6 +50,7 @@ return array(
     ),
     'OnPageNotFound' => array(
         'msFavoriter',
-        'not_found'
+        'not_found',
+        'sitemap_generate'
     )
 );

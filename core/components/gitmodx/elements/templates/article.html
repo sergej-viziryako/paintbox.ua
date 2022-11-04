@@ -15,9 +15,20 @@
               <i class="icon-calendar"></i>
               <span>{$_modx->resource.publishedon | date_format : '%d.%m.%Y'}</span>
             </div>
-            <div class="view cell">
+            <div class="date cell">
+              <i class="icon-pencil"></i>
+              <span>{$_modx->resource.editedon | date_format:"%d.%m.%Y" }</span>
             </div>
-            {$_modx->runSnippet('!xLike',['tpl' => 'tplXLike'])}
+            <div class="view cell">
+              <i class="icon-eye"></i>
+              <span>{$_modx->lexicon('article_views')}:
+                <span>
+                  {$_modx->runSnippet('!siteStatistics',['resource' => "{$_modx->resource.id}"])}
+                </span>
+              </span>
+            </div>
+            {*$_modx->runSnippet('!xLike',['tpl' => 'tplXLike'])*}
+            {$_modx->runSnippet('!SimpleRating',['tpl' => 'tplSimpleRatingPage'])}
           </div>
         {/if}
         <div class="content">

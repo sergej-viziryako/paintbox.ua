@@ -15,7 +15,13 @@
     <div class="text">
       <a href="{$id | url}" class="caption">{$pagetitle}</a>
       <div class="date">
-        <span>{$publishedon | date_format : "%d.%m.%Y"}</span>
+          <i class="icon-calendar"></i>
+          <span>{$publishedon | date_format : "%d.%m.%Y"}</span> |
+          <i class="icon-pencil"></i>
+          <span>{$editedon | date_format:"%d.%m.%Y" }</span> |
+          <i class="icon-eye"></i>
+          {$_modx->runSnippet('!siteStatistics',['resource' => "{$id}"])} |
+          {$_modx->runSnippet('!SimpleRating',['id' => "{$id}",'tpl' => 'tplSimpleRatingPage_1'])}
       </div>
       <div class="description">
         <p>{$content | notags | truncate : 200 : '...' | replace : "&nbsp;" : ""}</p>

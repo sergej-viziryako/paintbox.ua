@@ -1,16 +1,9 @@
 <?php
 define('MODX_API_MODE', true);
-require dirname(dirname(__FILE__)).'/index.php';
+require dirname(dirname(__FILE__)).'/api.php';
+//$_SERVER['DOCUMENT_ROOT']
 
 $name_export = 'sitemap-ua';
-
-//Download csv file
-/*header("Pragma: public");
-header("Expires: 0");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Cache-Control: private",false);
-header("Content-Type: application/octet-stream");
-header("Content-Disposition: attachment; filename=\"$name_export.xml\";" );*/
 
 set_time_limit(259200);
 $fp = fopen(dirname(dirname(__FILE__)).'/xml/' . $name_export . '.xml', 'w');
@@ -31,9 +24,11 @@ $pars_product = array(
 );
 
 $output_offer = $modx->runSnippet('pdoResources', $pars_product);
+
 $file_product = '<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 '.$output_offer.'
 </urlset>';
 fwrite($fp, $file_product);
 fclose($fp);
+return 'The End';

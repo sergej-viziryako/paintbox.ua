@@ -15,4 +15,4 @@ Disallow: /compare
 Disallow: /profil
 Disallow: /reestracziya
 
-Sitemap: https://paintbox.ua/sitemap.xml
+Sitemap: https://paintbox.ua/sitemap_index.xml

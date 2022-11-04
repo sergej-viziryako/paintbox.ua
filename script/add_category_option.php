@@ -33,7 +33,9 @@ $i = 0;
 
 
 foreach ($resources as $res) {
+    //print $res->get('id').'<br>';
     //print $res['id'].'<br>';
+
     foreach ($list_option as $list_option_id) {
         parentAddOptions($list_option_id, $res['id']);
     }
