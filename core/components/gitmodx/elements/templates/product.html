@@ -245,9 +245,9 @@
                             <a href="/files/{$row.image}" target="_blank">
                               <i class="icon-download"></i>
                               {if $_modx->config.cultureKey != 'ua'}
-                                <span>{$row.description_ukr}</span>
-                              {else}
                                 <span>{$row.description}</span>
+                              {else}
+                                <span>{$row.description_ukr}</span>
                               {/if}
                             </a>
                           </li>
@@ -262,50 +262,38 @@
                 <div class="block-delivery">
                   <div class="block-delivery-block">
                     <div class="title"><span>Доставка</span></div>
-                    <p>Самовивіз: м. Kиїв, пpoвулoк Paдищeвa, 4</p>
-                    <p>По Україні: "Нова Пошта", "Інтайм", "Delivery" за тарифами перевізника</p>
+                    {$_modx->config.info_product_delivery_ua}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Оплата</span></div>
-                    <ul>
-                      <li>готівкою</li>
-                      <li>банківською картою</li>
-                      <li>післяплатою</li>
-                      <li>безготівковий розрахунок</li>
-                    </ul>
+                    {$_modx->config.info_product_payment_ua}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Повернення</span></div>
-                    <p><b>14 днів</b> на повернення товару або обмін товару</p>
+                    {$_modx->config.info_product_return_ua}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Гарантія</span></div>
-                    <p><b>12 місяців</b> офіційної гарантії</p>
+                    {$_modx->config.info_product_garanty_ua}
                   </div>
                 </div>
                 {else}
                 <div class="block-delivery">
                   <div class="block-delivery-block">
                     <div class="title"><span>Доставка</span></div>
-                    <p>Самовывоз: г. Kиев, пpoулoк Paдищeвa, 4</p>
-                    <p>По Украине: "Новая Почта", "Интайм", "Delivery" по тарифам перевозчика</p>
+                    {$_modx->config.info_product_delivery}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Оплата</span></div>
-                    <ul>
-                      <li>наличными</li>
-                      <li>банковской картой</li>
-                      <li>наложенным платежом</li>
-                      <li>безналичный расчет</li>
-                    </ul>
+                    {$_modx->config.info_product_payment}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Возврат</span></div>
-                    <p><b>14 дней</b> на возврат товара или обмен товара</p>
+                    {$_modx->config.info_product_return}
                   </div>
                   <div class="block-delivery-block">
                     <div class="title"><span>Гарантия</span></div>
-                    <p><b>12 месяцев</b> официальной гарантии</p>
+                    {$_modx->config.info_product_garanty}
                   </div>
                 </div>
                 {/if}

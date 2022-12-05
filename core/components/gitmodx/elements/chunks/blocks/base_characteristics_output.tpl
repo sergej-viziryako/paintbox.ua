@@ -3,7 +3,8 @@
     {var $vendor = $_modx->runSnippet('translit',['string'=>"{$_pls['vendor.name'] | lower | replace:"(":"" | replace:")":""}"])}
     {if $_modx->resource.template == 20}
       <div class="row">
-        <span>{$_modx->lexicon('vendor_name')}:</span><span>{$_modx->runSnippet('getVendorPage',['vendor_name'=>"{$_modx->lexicon($vendor)}"])}</span>
+        {*<span>{$_modx->lexicon('vendor_name')}:</span><span>{$_modx->runSnippet('getVendorPage',['vendor_name'=>"{$_modx->lexicon($vendor)}"])}</span>*}
+        <span>{$_modx->lexicon('vendor_name')}:</span><span>{$_modx->runSnippet('getVendorPage',['vendor_name'=>"{$_pls['vendor.name']}"])}</span>
       </div>
     {else}
       <div class="row">

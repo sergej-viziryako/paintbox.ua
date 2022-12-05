@@ -13,8 +13,10 @@
       <i class="checkmark icon-check"></i>
       {if $filter in list ["parent"]}
         <span>{$pagetitle_lang}</span><sup>{$num}</sup>
+      {elseif $filter in list ["vendor"]}
+        <span>{$title}</span><sup>{$num}</sup>
       {else}
-        <span>{$title_checkbox} <sup>{$num}</sup></span>
+        <span>{$title_checkbox}</span><sup>{$num}</sup>
       {/if}
     </label>
   </div>
