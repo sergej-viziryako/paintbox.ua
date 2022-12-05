@@ -44,12 +44,16 @@
         )}
       {/if}
 
-
       {if $_modx->resource.template in list [44]}
+          {set $arr_parent_id = $_modx->getParentIds($_modx->resource.id)}
+          {if count($arr_parent_id) == 3}
+              {var $brand_auto = $arr_parent_id[0] | resource : 'pagetitle'~' '}
+          {/if}
+
           {if $_modx->config.cultureKey != 'ua'}
-              <h1>{$_modx->resource.h1?:'Автокраска для автомобиля '~$_modx->resource.pagetitle}</h1>
+              <h1>{$_modx->resource.h1?:'Автокраска для автомобиля '~$brand_auto~$_modx->resource.pagetitle}</h1>
           {else}
-              <h1>{$_modx->resource.h1Ua?:'Автофарба для автомобіля '~$_modx->resource.pagetitle}</h1>
+              <h1>{$_modx->resource.h1Ua?:'Автофарба для автомобіля '~$brand_auto~$_modx->resource.pagetitle}</h1>
           {/if}
       {else}
           {if $_modx->config.cultureKey != 'ua'}
