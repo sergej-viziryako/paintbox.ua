@@ -11,22 +11,21 @@
       <div class="container">
         <div class="sitemap-block">
           {if $_modx->config.cultureKey != 'ua'}
+          <ul class="sitemap">
             {$_modx->runSnippet('!pdoPage',
             [
               'elementClass' => 'modSnippet',
-              'element' => 'pdoMenu',
-              'parents' => '2,160,164',
+              'parents' => '2,160,164,29312',
               'resources' => '-1',
-              'templates' => '-20',
-              'level' => 0,
-              'displayStart' => 1,
-              'tpl' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>',
-              'tplStart' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>'
-              'tplOuter' => '@INLINE <ul class="sitemap">{$wrapper}</ul>',
-              'tplInner' => '@INLINE <ul>{$wrapper}</ul>',
+              'templates' => '-20,-45',
+              'depth' => 0,
+              'tpl' => 'tplSitemapHtml',
               'tvPrefix' => '',
-              'limit' => 25,
-              'sortby' => 'menuindex',
+              'limit' => 1,
+              'sortby' => 'pagetitle',
+              'sortdir' => 'ASC',
+              'cache' => 1,
+              'cacheTime' => 2592000,
               'includeContent' => 1,
               'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
               'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
@@ -45,23 +44,23 @@
               'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
             ]
           )}
+          </ul>
           {else}
+          <ul class="sitemap">
             {$_modx->runSnippet('!pdoPage',
               [
               'elementClass' => 'modSnippet',
-              'element' => 'pdoMenu',
-              'parents' => '2,160,164',
+              'parents' => '2,160,164,29312',
               'resources' => '-1',
-              'templates' => '-20',
-              'level' => 0,
-              'displayStart' => 1,
-              'tpl' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>',
-              'tplStart' => '@INLINE <li {$classes}><a href="{$link}">{$menutitle}</a>{$wrapper}</li>'
-              'tplOuter' => '@INLINE <ul class="sitemap">{$wrapper}</ul>',
-              'tplInner' => '@INLINE <ul>{$wrapper}</ul>',
+              'templates' => '-20,-45',
+              'depth' => 0,
+              'tpl' => 'tplSitemapHtml',
               'tvPrefix' => '',
-              'limit' => 25,
-              'sortby' => 'menuindex',
+              'limit' => 1,
+              'sortby' => 'pagetitle',
+              'sortdir' => 'ASC',
+              'cache' => 1,
+              'cacheTime' => 2592000,
               'includeContent' => 1,
               'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
               'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
@@ -76,6 +75,7 @@
               'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
               ]
             )}
+          </ul>
           {/if}
         </div>
         <div class="pagination-block">
