@@ -33,7 +33,7 @@
 {/if}
 <section class="section- section-category">
   <div class="container">
-    {if $_modx->resource.id == 1}
+    {if $_modx->resource.id == 1 OR $_modx->resource.id == 9}
       <div class="section-caption">
         <div class="caption">
           <span>{$_modx->lexicon('our_catalog_main')}</span>
