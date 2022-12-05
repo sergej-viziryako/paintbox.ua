@@ -92,9 +92,6 @@
 {insert 'product_schema_org'}
 {insert 'og_markup'}
 {insert 'organization_schema'}
-{*if $_modx->resource.template in list [24,37]}
-{insert 'category_markup'}
-{/if*}
 {if $_modx->resource.parent in list [162]}
 {insert 'article_schema'}
 {/if}
