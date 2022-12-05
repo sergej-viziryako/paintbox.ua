@@ -6,11 +6,11 @@
 {if $rows?}
   <section class="section- section-questions-answers">
     <div class="container">
-      <div class="section-caption">
+      {*<div class="section-caption">
         <div class="caption">
           <span>{$_modx->lexicon('faq_block_title')} на {$_modx->runSnippet('dateTodayMin')}</span>
         </div>
-      </div>
+      </div>*}
       <div class="questansw-block">
         <ul class="questansw accordion-questansw" itemscope="" itemtype="https://schema.org/FAQPage">
           {foreach $rows as $row first=$first}
