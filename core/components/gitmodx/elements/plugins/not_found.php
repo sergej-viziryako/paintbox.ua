@@ -8,7 +8,7 @@ if ($modx->event->name == "OnPageNotFound") {
         return;
     }
 
-    if(stripos($_REQUEST['q'],'sitemap_') !== FALSE){
+    if(stripos($_REQUEST['q'],'sitemap') !== FALSE){
         return;
     }
 
