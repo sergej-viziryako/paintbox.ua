@@ -542,7 +542,22 @@ select:disabled {
 .block-info {
   background: #ffff;
 }
+.rating-description {
+  width: 100%;
+  text-align: center;
+}
 
+.products li .inner .img .status-block .status.status-6, .photovideogallery .status-block .status.status-6 {
+  background: #ffc000;
+}
+
+.products li .inner .img .status-block .status.status-7, .photovideogallery .status-block .status.status-7 {
+  background: #12adc5;
+}
+
+.products li .inner .img .status-block .status.status-8, .photovideogallery .status-block .status.status-8 {
+  background: #6a00bc;
+}
 @media (max-width: 767px) {
   .content .feature .column-no-category {
     width: 100%;
