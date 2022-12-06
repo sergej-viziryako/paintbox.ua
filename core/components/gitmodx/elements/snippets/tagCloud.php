@@ -37,7 +37,7 @@ if($result) {
   $result = array_unique(explode(',', $result));
 
   foreach($result as $value) {
-    if ($culture_key != 'ru') {
+    if ($culture_key != 'ua') {
       $value_name = $modx->lexicon('tag_'.translit($value));
       $value_url = $culture_key.'/';
     } else {

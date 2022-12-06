@@ -1,0 +1,164 @@
+{set $taglinks = $_modx->runSnippet( '!tagLinks',[ 'get' => 1] )}
+<!DOCTYPE html>
+<html>
+{include 'head'}
+<body class="popup-holder popup-holder-menu popup-holder-catalog popup-holder-contacts popup-holder-callback popup-holder-help popup-holder-otherphones popup-holder-thanks" id="totop">
+<div id="wrapper">
+    {include 'topslider'}
+    {include 'header'}
+    <main role="main" id="main">
+        {include 'breadcrumbs'}
+        <section class="section- section-blogs">
+            <div class="container">
+                <div class="content">
+                    {if $_modx->resource.img?}
+                        <img src="/{$_modx->resource.img}" alt="" style="float: left; height: 200px">
+                    {/if}
+                    {if $_modx->config.cultureKey != 'ua'}
+                        {$_modx->resource.localizator_content}
+                    {else}
+                        {$_modx->resource.content}
+                    {/if}
+                </div>
+
+                {if $_modx->resource.id == 282442}
+                <div class="blogs-block">
+                    <ul class="blogs">
+                        {if $_modx->config.cultureKey != 'ua'}
+                        {$_modx->runSnippet('!pdoPage',
+                        [
+                        'elementClass' => 'modSnippet',
+                        'parents' => "{$_modx->resource.id}",
+                        'tpl' => 'tplAuthor',
+                        'depth' => 1,
+                        'limit' => 8,
+                        'includeTVs' => 'img',
+                        'tvPrefix' => '',
+                        'sortby' => 'publishedon',
+                        'sortdir' => 'DESC',
+                        'includeContent' => 1,
+                        'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                        'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                        'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                        'tplPageFirst' => '@INLINE  ',
+                        'tplPageFirstEmpty' => '@INLINE  ',
+                        'tplPageLast' => '@INLINE  ',
+                        'tplPageLastEmpty' => '@INLINE  ',
+                        'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                        'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>',
+                        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+                        "localizator.resource_id = modResource.id"}}',
+                        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+                        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+                        ]
+                        )}
+                        {else}
+                        {$_modx->runSnippet('!pdoPage',
+                        [
+                        'elementClass' => 'modSnippet',
+                        'parents' => "{$_modx->resource.id}",
+                        'tpl' => 'tplAuthor',
+                        'depth' => 1,
+                        'limit' => 8,
+                        'includeTVs' => 'img',
+                        'tvPrefix' => '',
+                        'sortby' => 'publishedon',
+                        'sortdir' => 'DESC',
+                        'includeContent' => 1,
+                        'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                        'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                        'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                        'tplPageFirst' => '@INLINE  ',
+                        'tplPageFirstEmpty' => '@INLINE  ',
+                        'tplPageLast' => '@INLINE  ',
+                        'tplPageLastEmpty' => '@INLINE  ',
+                        'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                        'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+                        ]
+                        )}
+                        {/if}
+                    </ul>
+                </div>
+                {else}
+                <div class="blogs-block">
+                    <ul class="blogs">
+                        {if $_modx->config.cultureKey != 'ua'}
+                        {$_modx->runSnippet('!pdoPage',
+                        [
+                        'elementClass' => 'modSnippet',
+                        'parents' => "{$_modx->resource.id}",
+                        'tpl' => 'tplAuthor',
+                        'depth' => 1,
+                        'limit' => 8,
+                        'includeTVs' => 'img,author',
+                        'tvPrefix' => '',
+                        'sortby' => 'publishedon',
+                        'sortdir' => 'DESC',
+                        'includeContent' => 1,
+                        'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                        'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                        'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                        'tplPageFirst' => '@INLINE  ',
+                        'tplPageFirstEmpty' => '@INLINE  ',
+                        'tplPageLast' => '@INLINE  ',
+                        'tplPageLastEmpty' => '@INLINE  ',
+                        'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                        'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>',
+                        'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+                        "localizator.resource_id = modResource.id"}}',
+                        'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+                        'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'","author:LIKE":"%'~$_modx->resource.id~'%"}',
+                        ]
+                        )}
+                        {else}
+                        {$_modx->runSnippet('!pdoPage',
+                        [
+                        'elementClass' => 'modSnippet',
+                        'parents' => '163,162',
+                        'tpl' => 'tplAuthor',
+                        'depth' => 1,
+                        'limit' => 8,
+                        'includeTVs' => 'img,author',
+                        'tvPrefix' => '',
+                        'sortby' => 'publishedon',
+                        'sortdir' => 'DESC',
+                        'includeContent' => 1,
+                        'where' => '[{"author:LIKE":"%'~$_modx->resource.id~'%"}]',
+                        'tplPageWrapper' => '@INLINE <ul class="pagination">{$prev}{$pages}{$next}</ul>',
+                        'tplPage' => '@INLINE <li><a href="{$href}" title="{$pageNo}">{$pageNo}</a></li>',
+                        'tplPageActive' => '@INLINE <li class="active"><a href="#">{$pageNo}</a></li>',
+                        'tplPageFirst' => '@INLINE  ',
+                        'tplPageFirstEmpty' => '@INLINE  ',
+                        'tplPageLast' => '@INLINE  ',
+                        'tplPageLastEmpty' => '@INLINE  ',
+                        'tplPagePrev' => '@INLINE <li><a href="{$href}"><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNext' => '@INLINE <li><a href="{$href}"><i class="icon-right-chevron"></i></a></li>'
+                        'tplPagePrevEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-left-chevron"></i></a></li>',
+                        'tplPageNextEmpty' => '@INLINE  <li class="disabled"><a href="#" ><i class="icon-right-chevron"></i></a></li>'
+                        ]
+                        )}
+                        {/if}
+                    </ul>
+                </div>
+                {/if}
+
+                <div class="pagination-block">
+                    {$_modx->getPlaceholder('page.nav')}
+                </div>
+            </div>
+        </section>
+        <section class="section- section-prefooter">
+        </section>
+    </main>
+    {include 'footer'}
+</div>
+{include 'popup'}
+{include 'script'}
+</body>
+</html>

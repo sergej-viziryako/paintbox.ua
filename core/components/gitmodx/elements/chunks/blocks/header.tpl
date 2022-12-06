@@ -91,12 +91,25 @@
       </div>
 
       <div class="block colors-link-block">
-        <a href="{$_modx->makeUrl(29312)}" class="colors-link">
-          <span class="icon">
-            <i class="icon-paint-palette"></i>
-          </span>
-          <span>{$_modx->runSnippet('!getPagetitleLocalizator', ['id' => 29312,'content' =>'pagetitle' ])}</span>
-        </a>
+
+        {if $_modx->resource.id == 29312}
+          <div class="colors-link">
+            <span class="icon">
+              <i class="icon-paint-palette"></i>
+            </span>
+            <span>{$_modx->runSnippet('!getPagetitleLocalizator', ['id' => 29312,'content' =>'pagetitle' ])}</span>
+          </div>
+        {else}
+          <a href="{$_modx->makeUrl(29312)}" class="colors-link">
+            <span class="icon">
+              <i class="icon-paint-palette"></i>
+            </span>
+            <span>{$_modx->runSnippet('!getPagetitleLocalizator', ['id' => 29312,'content' =>'pagetitle' ])}</span>
+          </a>
+        {/if}
+
+
+
       </div>
 
       <div class="block pagelinks-block">

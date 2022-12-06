@@ -1,3 +1,39 @@
+{set $time_read_article = $_modx->runSnippet('time_read_article',['content' => "{$_modx->resource.content}"])}
+{if $_modx->config.cultureKey != 'ua'}
+{set $authors = $_modx->runSnippet(
+'pdoResources',
+[
+'parents' => 282442,
+'resources' => "999999999,{$_modx->resource.author}",
+'level' => 0,
+'tpl' => '@INLINE <a href="{$id | url}">{$pagetitle}</a>, ',
+'tplLast' => '@INLINE <a href="{$id | url}">{$pagetitle}</a>',
+'limit' => 0,
+'cache' => 1,
+'cacheTime' => 3600,
+'hereClass' => 'active',
+'leftJoin' => '{"localizator" : {"class" : "localizatorContent","alias" : "localizator","on" :
+"localizator.resource_id = modResource.id"}}',
+'select' => '{"localizator" : "modResource.*, localizator.*, modResource.id"}',
+'where' => '{"localizator.key" : "'~ ('localizator_key' | option) ~'"}',
+]
+)}
+{else}
+{set $authors = $_modx->runSnippet(
+'pdoResources',
+[
+'parents' => 282442,
+'resources' => "999999999,{$_modx->resource.author}",
+'level' => 0,
+'tpl' => '@INLINE <a href="{$id | url}">{$pagetitle}</a>, ',
+'tplLast' => '@INLINE <a href="{$id | url}">{$pagetitle}</a>',
+'limit' => 0,
+'cache' => 1,
+'cacheTime' => 3600,
+'hereClass' => 'active'
+]
+)}
+{/if}
 <!DOCTYPE html>
 <html>
 {include 'head'}
@@ -11,6 +47,17 @@
       <div class="container">
         {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163} {*если ресурс из блога или новостей*}
           <div class="block block-info">
+            {if $authors?}
+            <div class="date cell">
+              <i class="icon-user"></i>
+              <span>{$authors}</span>
+            </div>
+            {/if}
+            <div class="date cell">
+              <i class="icon-clock"></i>
+              <span>{$time_read_article}</span>
+            </div>
+
             <div class="date cell">
               <i class="icon-calendar"></i>
               <span>{$_modx->resource.publishedon | date_format : '%d.%m.%Y'}</span>
@@ -21,14 +68,13 @@
             </div>
             <div class="view cell">
               <i class="icon-eye"></i>
-              <span>{$_modx->lexicon('article_views')}:
-                <span>
-                  {$_modx->runSnippet('!siteStatistics',['resource' => "{$_modx->resource.id}"])}
-                </span>
+              <span>
+                {*$_modx->lexicon('article_views')*}
+                {$_modx->runSnippet('!siteStatistics',['resource' => "{$_modx->resource.id}"])}
               </span>
             </div>
             {*$_modx->runSnippet('!xLike',['tpl' => 'tplXLike'])*}
-            {$_modx->runSnippet('!SimpleRating',['tpl' => 'tplSimpleRatingPage'])}
+            {*$_modx->runSnippet('!SimpleRating',['tpl' => 'tplSimpleRatingPage'])*}
           </div>
         {/if}
         <div class="content">
@@ -37,12 +83,53 @@
           {else}
             {$_modx->resource.content}
           {/if}
+
+
         </div>
+
+        {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163} {*если ресурс из блога или новостей*}
+        <div class="block block-info">
+          {if $authors?}
+          <div class="date cell">
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox"></div>
+          </div>
+          {/if}
+          {$_modx->runSnippet('!SimpleRating',['tpl' => 'tplSimpleRatingPage'])}
+        </div>
+        {/if}
+
+
+      </div>
+    </section>
+
+    <section class="section- section-reviews bg-cbg" id="reviews">
+      <div class="container">
+        <div class="section-caption">
+          <div class="caption">
+            <i class="icon-chat"></i>
+            <span>{$_modx->lexicon('item_review')} <span class="number">{$ticketcount == ''? '': $ticketcount}</span></span>
+          </div>
+        </div>
+        {$_modx->runSnippet(
+        '!TicketComments',
+        [
+        'allowGuest' => '1',
+        'tplComments' => 'tplTicketsCommentWrapperItem',
+        'tplCommentFormGuest' => 'tplTicketsCommentFormSite',
+        'tplCommentForm' => 'tplTicketsCommentFormLogin',
+        'tplCommentAuth' => 'tplTicketsCommentOneAuthSite',
+        'formBefore' => 0,
+        'autoPublish' => 0,
+        'autoPublishGuest' => 0,
+        'enableCaptcha' => 0
+        ]
+        )}
       </div>
     </section>
 
     {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163} {*если ресурс из блога или новостей показываем привязанные товары*}
-      {if $_modx->config.cultureKey != 'ru'}
+      {if $_modx->config.cultureKey != 'ua'}
         {set $rel_items = $_modx->runSnippet(
           'msProducts',
           [
@@ -97,7 +184,7 @@
     {/if}
 
     {if $_modx->resource.parent == 163} {*другие новости*}
-      {if $_modx->config.cultureKey != 'ru'}
+      {if $_modx->config.cultureKey != 'ua'}
         {set $other_news = $_modx->runSnippet(
         'pdoResources',
           [
@@ -161,7 +248,7 @@
     {/if}
 
     {if $_modx->resource.parent == 162} {*другие статьи*}
-      {if $_modx->config.cultureKey != 'ru'}
+      {if $_modx->config.cultureKey != 'ua'}
         {set $other_blog_articles = $_modx->runSnippet(
         'pdoResources',
           [
@@ -230,5 +317,9 @@
 </div>
 {include 'popup'}
 {include 'script'}
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-638f8603bf9eb3bf"></script>
+
 </body>
 </html>

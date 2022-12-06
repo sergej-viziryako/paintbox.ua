@@ -1,6 +1,6 @@
 <li class="ticket-comment{$comment_new} {if $properties['is_admin'] == 1}admin{/if}" id="comment-{$id}" data-parent="{$parent}" data-newparent="{$new_parent}" data-id="{$id}">
   <div class="inner">
-    {if $properties['is_admin'] == 1}
+    {*if $properties['is_admin'] == 1}
       {if $_modx->config.review_admin_name?}
         <div class="caption">{$_modx->config.review_admin_name}</div>
       {else}
@@ -12,7 +12,8 @@
       {/if}
     {else}
       <div class="caption">{$fullname}</div>
-    {/if}
+    {/if*}
+    <div class="caption">{$fullname}</div>
     <div class="date">{$date_ago}</div>
     {if $properties['starrating']?}
       <div class="stars">

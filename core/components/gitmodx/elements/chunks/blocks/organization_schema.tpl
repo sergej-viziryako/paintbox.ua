@@ -66,32 +66,32 @@
   </script>
 {/if}
 
-{*
+{if $_modx->resource.template in list [47]}
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Seattle", //Город
-      "addressRegion": "WA", //Регион
-      "postalCode": "98052", //Индекс
-      "streetAddress": "20341 Whitworth Institute 405 N. Whitworth" //Адрес
+      "addressLocality": "{$_modx->resource.addresslocality}",
+      "addressRegion": "{$_modx->resource.addressregion}",
+      "postalCode": "{$_modx->resource.postalcode}",
+      "streetAddress": "{$_modx->resource.streetaddress}"  
     },
     "colleague": [
-      "http://www.xyz.edu/students/alicejones.html", //Адрес официальной веб-страницы коллег
-      "http://www.xyz.edu/students/bobsmith.html" //Адрес официальной веб-страницы коллег
+      "{$_modx->resource.colleague1}",
+      "{$_modx->resource.colleague2}"
     ],
-    "email": "mailto:jane-doe@xyz.edu", //e-mail
-    "image": "janedoe.jpg", //адрес фото
-    "jobTitle": "Professor", //Должность
-    "name": "Алексей", //Имя
-    "additionalName": "Владимирович", //Отчество
-    "familyName": "Петров", //Фамилия
-    "telephone": "(425) 123-4567", //телефон
-    "url": "http://www.janedoe.com" //Адрес официальной веб-страницы (вроде wikipedia
+    "email": "mailto:{$_modx->resource.email_author}",
+    "image": "{$site_addressOrganization}{$_modx->resource.img}",
+    "jobTitle": "{$_modx->resource.jobtitle}",
+    "name": "{$_modx->resource.name_author}",
+    "additionalName": "{$_modx->resource.additionalname}",
+    "familyName": "{$_modx->resource.familyname}",
+    "telephone": "{$_modx->resource.telephone_authors}",
+    "url": "{$_modx->resource.url_authors}"
   }
 </script>
-*}
+{/if}
 
 

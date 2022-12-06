@@ -10,5 +10,8 @@
         <i class="icon-picture"></i>
       </a>
     {/if}
+      <div class="text">
+          <a href="{$id | url}">{$pagetitle}</a>
+      </div>
   </div>
 </li>

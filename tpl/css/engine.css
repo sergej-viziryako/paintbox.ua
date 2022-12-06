@@ -541,7 +541,15 @@ select:disabled {
 .block-delivery-block {width: 50%; float: left;margin-bottom: 10px;}
 .block-info {
   background: #ffff;
+  margin: 0 0 10px;
 }
+
+.brands li .inner {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
 .rating-description {
   width: 100%;
   text-align: center;
