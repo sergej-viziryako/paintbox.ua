@@ -1,4 +1,9 @@
-{set $time_read_article = $_modx->runSnippet('time_read_article',['content' => "{$_modx->resource.content}"])}
+{if $_modx->config.cultureKey != 'ua'}
+  {set $content = $_modx->resource.localizator_content}
+{else}
+  {set $content = $_modx->resource.content}
+{/if}
+{set $time_read_article = $_modx->runSnippet('time_read_article',['content' => "{$content}"])}
 {if $_modx->config.cultureKey != 'ua'}
 {set $authors = $_modx->runSnippet(
 'pdoResources',
@@ -78,13 +83,7 @@
           </div>
         {/if}
         <div class="content">
-          {if $_modx->config.cultureKey != 'ua'}
-            {$_modx->resource.localizator_content}
-          {else}
-            {$_modx->resource.content}
-          {/if}
-
-
+          {$content}
         </div>
 
         {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163} {*если ресурс из блога или новостей*}
@@ -102,7 +101,8 @@
 
       </div>
     </section>
-
+    
+    {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163}
     <section class="section- section-reviews bg-cbg" id="reviews">
       <div class="container">
         <div class="section-caption">
@@ -127,6 +127,7 @@
         )}
       </div>
     </section>
+    {/if}
 
     {if $_modx->resource.parent == 162 || $_modx->resource.parent == 163} {*если ресурс из блога или новостей показываем привязанные товары*}
       {if $_modx->config.cultureKey != 'ua'}
